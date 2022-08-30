@@ -19,6 +19,10 @@ function DevLayout() {
           </li>
 
           <li>
+            <Link to="/shops">SHOPS</Link>
+          </li>
+
+          <li>
             <Link to="/idontknowwheretogo">404</Link>
           </li>
         </ul>
