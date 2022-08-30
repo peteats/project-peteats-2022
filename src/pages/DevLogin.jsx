@@ -3,31 +3,45 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useInput from '../hooks/useInput';
+import apiHelper from '../utils/helpers';
 
 function DevLogin() {
   const navigate = useNavigate();
+  // const { setToken } = useAuth();
 
   const email = useInput('');
   const password = useInput('');
+
+  const saveToken = ({ JwtToken }) => {
+    console.log('AUTH_TOKEN:::', JwtToken);
+    const AUTH_TOKEN = `Bearer ${JwtToken}`;
+    // setToken(JwtToken);
+    localStorage.setItem('JwtToken', AUTH_TOKEN);
+  };
 
   const submitForm = (event) => {
     event.preventDefault();
     console.log('email', email.value);
     console.log('password', password.value);
 
-    const user = {
+    const data = {
       Account: email.value,
       Password: password.value,
     };
+    // const data = {
+    //   Account: 'yuuya82323@gmail.com',
+    //   Password: 'Text1234',
+    // };
+    console.log('user-input:::', data);
 
-    console.log(user);
-
-    // apis.usersLogIn({ user }).then((res) => {
-    //   console.log(res);
-
-    //   saveToken(res);
-    //   navigate('/todos');
-    // });
+    apiHelper.userLogin(data).then((res) => {
+      console.log(res);
+      // const { JwtToken } = res?.data ?? null;
+      // console.log('JWT::', JwtToken);
+      saveToken(res?.data);
+      navigate('/shops');
+    });
+    /* end of userLogin() */
   };
 
   return (

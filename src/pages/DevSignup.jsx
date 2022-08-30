@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useInput from '../hooks/useInput';
+import apiHelper from '../utils/helpers';
 
 function DevSignup() {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ function DevSignup() {
     // MobilePhone: 'string';
     // Name: 'string';
     // Password: 'string';
-    const user = {
+    const data = {
       Account: email.value,
       Password: password.value,
       Name: userName.value,
@@ -71,15 +72,11 @@ function DevSignup() {
       Address: address.value,
     };
 
-    console.log(user);
-
-    // apis.usersSignUp({ user }).then((res) => {
-    //   console.log(res);
-
-    //   saveToken(res);
-    //   // #TODO: if(res.ok)
-    //   navigate('/todos');
-    // });
+    console.log(data);
+    apiHelper.userSignUp(data).then((res) => {
+      console.log(res);
+    });
+    /* end of userSignUp() */
   };
 
   return (

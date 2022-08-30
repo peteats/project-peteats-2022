@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import apiHelper from '../utils/helpers';
 
@@ -7,6 +8,7 @@ import poweredBy from '../images/powered-by-vitawind-dark.png';
 
 function DevPage() {
   const [count, setCount] = useState(0);
+  const [resMsg, setResMsg] = useState('');
 
   return (
     <div className="text-center selection:bg-green-900">
@@ -18,31 +20,36 @@ function DevPage() {
           onClick={() => {
             console.log('SIGN-UP');
 
-            // const user = {
-            //   email: 'g2@dev',
-            //   nickname: 'g1@dev',
-            //   password: 'g1@dev',
-            // };
-            // apiHelper.userSignUp({ user }).then((res) => {
-            //   console.log(res);
-            //   const { authorization } = res?.headers ?? null;
-            //   console.log('JWT::', authorization);
-            // });
-
-            const data = {
-              Account: 'maord@pm.me',
-              Password: 'g1@dev',
-              Name: 'g1@dev',
-              MobilePhone: 'g1@dev',
-              Address: 'g1@dev',
+            const user = {
+              email: 'g1@dev',
+              nickname: 'g1@dev',
+              password: 'g1@dev',
             };
-
-            apiHelper.userSignUp(data).then((res) => {
+            apiHelper.userSignUp({ user }).then((res) => {
               console.log(res);
+              const { authorization } = res?.headers ?? null;
+              console.log('JWT::', authorization);
             });
+
+            // const data = {
+            //   Account: 'maord@pm.me',
+            //   Password: 'g1@dev',
+            //   Name: 'g1@dev',
+            //   MobilePhone: 'g1@dev',
+            //   Address: 'g1@dev',
+            // };
+            // apiHelper.userSignUp(data).then((res) => {
+            //   console.log(res);
+            // });
             /* end of userSignUp() */
           }}
         />
+
+        <p>
+          res:
+          {/* {JSON.stringify(null, 2, resMsg)} */}
+          {resMsg}
+        </p>
 
         <button
           type="button"
@@ -50,29 +57,31 @@ function DevPage() {
           onClick={() => {
             console.log('LOG-IN');
 
-            // const user = {
-            //   email: 'g2@dev',
-            //   password: 'g1@dev',
+            const user = {
+              email: 'g1@dev',
+              password: 'g1@dev',
+            };
+            apiHelper.userLogin({ user }).then((res) => {
+              console.log(res);
+              setResMsg(JSON.stringify(resMsg, null, 2));
+
+              const { authorization } = res?.headers ?? null;
+              console.log('JWT::', authorization);
+              localStorage.setItem('JWT', authorization);
+              // saveToken(res);
+            });
+
+            // const data = {
+            //   Account: 'maord@pm.me',
+            //   Password: 'string',
             // };
-            // apiHelper.userLogin({ user }).then((res) => {
+
+            // apiHelper.userLogin(data).then((res) => {
             //   console.log(res);
             //   const { authorization } = res?.headers ?? null;
             //   console.log('JWT::', authorization);
-            //   localStorage.setItem('JWT', authorization);
             //   // saveToken(res);
             // });
-
-            const data = {
-              Account: 'maord@pm.me',
-              Password: 'g1@dev',
-            };
-
-            apiHelper.userLogin(data).then((res) => {
-              console.log(res);
-              const { authorization } = res?.headers ?? null;
-              console.log('JWT::', authorization);
-              // saveToken(res);
-            });
             /* end of userLogin() */
           }}
         >
@@ -87,16 +96,41 @@ function DevPage() {
             console.log('EDIT');
 
             const data = {
-              Account: 'g1@dev',
-              // Password: 'g1@dev',
-              Name: '000000',
-              MobilePhone: '000000',
-              // Address: '000000',
+              Name: 'string',
+              MobilePhone: 'string',
+              Address: 'string',
             };
 
-            apiHelper.userEdit(data).then((res) => {
-              console.log(res);
-            });
+            // const data = {
+            //   Account: 'g1@dev',
+            //   // Password: 'g1@dev',
+            //   Name: '000000',
+            //   MobilePhone: '000000',
+            //   // Address: '000000',
+            // };
+
+            const config = {
+              method: 'put',
+              url: 'https://peteats.rocket-coding.com/api/users/edit',
+              headers: {
+                Authorization:
+                  'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6NSwiQWNjb3VudCI6Inl1dXlhODIzMjNAZ21haWwuY29tIiwiTmFtZSI6Inl1dXlhODIzMjMiLCJFeHAiOiI4LzI5LzIwMjIgNDoxOTo0MCBQTSJ9.nmbHchQ6MzH9rPXalj4lOIYknAyzzy2dowpBxBp_3FauEUJVxh8VuPw57Czunxr26Je-NeRcQrO1NQcm6DwXgQ',
+                'Content-Type': 'application/json',
+              },
+              data,
+            };
+
+            axios(config)
+              .then((response) => {
+                console.log(JSON.stringify(response.data));
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+            // apiHelper.userEdit(data).then((res) => {
+            //   console.log(res);
+            // });
             /* end of userEdit() */
           }}
         />

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const BASE_URL = 'https://localhost:44312/';
-const BASE_URL = 'https://todoo.5xcamp.us/';
+const BASE_URL = 'https://peteats.rocket-coding.com';
+// const BASE_URL = 'https://todoo.5xcamp.us';
 
 const baseReq = axios.create({
   baseURL: `${BASE_URL}/api`,
@@ -35,17 +35,16 @@ baseReq.interceptors.request.use(
 );
 /* end of axios-config */
 
-const userSignUp = async (data) => {
-  // const userSignUp = async ({ user }) => {
-
-  console.log(data);
-  const response = await baseReq
-    .post('/users/sign-up', data)
-    .catch((error) => error.response);
-
+// const userSignUp = async (data) => {
+const userSignUp = async ({ user }) => {
+  // console.log(data);
   // const response = await baseReq
-  //   .post('/users', { user })
+  //   .post('/users/sign-up', data)
   //   .catch((error) => error.response);
+
+  const response = await baseReq
+    .post('/users', { user })
+    .catch((error) => error.response);
 
   return response;
 };
@@ -53,6 +52,7 @@ const userSignUp = async (data) => {
 // const userLogin = async ({ user }) => {
 const userLogin = async (data) => {
   console.log(data);
+
   const response = await baseReq
     .post('/users/login', data)
     .catch((error) => error.response);
