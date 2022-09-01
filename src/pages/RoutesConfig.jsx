@@ -8,8 +8,9 @@ import DevSignup from './DevSignup';
 import DevLogin from './DevLogin';
 import DevShops from './DevShops';
 import DevMe from './DevMe';
-// import DevSetting from './DevSetting';
-
+import DevSetting from './DevSetting';
+import DevReset from './DevReset';
+// import Redirect from './Redirect';
 import PageNotFound from './PageNotFound';
 
 function RoutesConfig() {
@@ -53,6 +54,23 @@ function RoutesConfig() {
           //   },
           // ],
         },
+        {
+          path: '/auth-mail',
+          element: <DevSetting />,
+        },
+        {
+          path: '/reset-password',
+          element: <DevSetting />,
+        },
+        {
+          path: '/new-password',
+          element: <DevReset />,
+        },
+
+        // {
+        //   path: '/auth-mail',
+        //   element: <Redirect to="/auth" />,
+        // },
 
         {
           path: '/*',

@@ -10,9 +10,34 @@ function DevPage() {
   const [count, setCount] = useState(0);
   const [resMsg, setResMsg] = useState('');
 
+  const saveToken = ({ JwtToken }) => {
+    console.log('AUTH_TOKEN:::', JwtToken);
+    const AUTH_TOKEN = `Bearer ${JwtToken}`;
+    // setToken(JwtToken);
+    localStorage.setItem('JWT', AUTH_TOKEN);
+  };
+
   return (
     <div className="text-center selection:bg-green-900">
       <header className="container">
+        <input
+          type="button"
+          value="NEW"
+          className="m-2 rounded bg-[#FA3] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
+          onClick={() => {
+            console.log('NEW');
+
+            const data = {
+              Password: 'Bb000000',
+              CheckPassword: 'Bb000000',
+            };
+
+            apiHelper.userNewPassword(data).then((res) => {
+              console.log(res);
+            });
+          }}
+        />
+
         <input
           value="SIGN-UP"
           type="button"
@@ -57,31 +82,37 @@ function DevPage() {
           onClick={() => {
             console.log('LOG-IN');
 
-            const user = {
-              email: 'g1@dev',
-              password: 'g1@dev',
-            };
-            apiHelper.userLogin({ user }).then((res) => {
-              console.log(res);
-              setResMsg(JSON.stringify(resMsg, null, 2));
+            // const user = {
+            //   email: 'g1@dev',
+            //   password: 'g1@dev',
+            // };
+            // apiHelper.userLogin({ user }).then((res) => {
+            //   console.log(res);
+            //   setResMsg(JSON.stringify(resMsg, null, 2));
 
-              const { authorization } = res?.headers ?? null;
-              console.log('JWT::', authorization);
-              localStorage.setItem('JWT', authorization);
-              // saveToken(res);
-            });
+            //   const { authorization } = res?.headers ?? null;
+            //   console.log('JWT::', authorization);
+            //   localStorage.setItem('JWT', authorization);
+            //   // saveToken(res);
+            // });
 
             // const data = {
             //   Account: 'maord@pm.me',
             //   Password: 'string',
             // };
+            const data = {
+              Account: 'yuuya82323@gmail.com',
+              Password: 'Text1234',
+            };
+            apiHelper.userLogin(data).then((res) => {
+              console.log(res);
+              // const { JwtToken } = res?.data ?? null;
+              // console.log('JWT::', JwtToken);
+              saveToken(res?.data);
 
-            // apiHelper.userLogin(data).then((res) => {
-            //   console.log(res);
-            //   const { authorization } = res?.headers ?? null;
-            //   console.log('JWT::', authorization);
-            //   // saveToken(res);
-            // });
+              // const { authorization } = res?.headers ?? null;
+              // console.log('JWT::', authorization);
+            });
             /* end of userLogin() */
           }}
         >

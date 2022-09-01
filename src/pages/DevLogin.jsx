@@ -16,7 +16,7 @@ function DevLogin() {
     console.log('AUTH_TOKEN:::', JwtToken);
     const AUTH_TOKEN = `Bearer ${JwtToken}`;
     // setToken(JwtToken);
-    localStorage.setItem('JwtToken', AUTH_TOKEN);
+    localStorage.setItem('JWT', AUTH_TOKEN);
   };
 
   const submitForm = (event) => {
