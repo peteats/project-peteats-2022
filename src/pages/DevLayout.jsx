@@ -9,19 +9,31 @@ function DevLayout() {
           <li>
             <Link to="/">HOME</Link>
           </li>
-
           <li>
             <Link to="/signup">SIGN-UP</Link>
           </li>
-
           <li>
             <Link to="/login">LOG-IN</Link>
           </li>
-
           <li>
             <Link to="/shops">SHOPS</Link>
           </li>
+          <li>
+            <Link to="/me">PROFILE</Link>
+          </li>
 
+          <li>
+            <Link to="/new-password">RESET</Link>
+          </li>
+          <li>
+            <Link to="/auth-mail">MAIL</Link>
+          </li>
+          <li>
+            <Link to="/auth">AUTH</Link>
+          </li>
+          <li>
+            <Link to="/dev">DEV</Link>
+          </li>
           <li>
             <Link to="/idontknowwheretogo">404</Link>
           </li>
