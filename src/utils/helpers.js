@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://peteats.rocket-coding.com';
+// const BASE_URL = 'https://easysplit.rocket-coding.com';
+
 // const BASE_URL = 'https://todoo.5xcamp.us';
 
 const baseReq = axios.create({
@@ -35,17 +37,16 @@ baseReq.interceptors.request.use(
 );
 /* end of axios-config */
 
-// const userSignUp = async (data) => {
-const userSignUp = async ({ user }) => {
-  // console.log(data);
-  // const response = await baseReq
-  //   .post('/users/sign-up', data)
-  //   .catch((error) => error.response);
-
+const userSignUp = async (data) => {
+  // const userSignUp = async ({ user }) => {
+  console.log(data);
   const response = await baseReq
-    .post('/users', { user })
+    .post('/users/sign-up', data)
     .catch((error) => error.response);
 
+  // const response = await baseReq
+  //   .post('/users', { user })
+  //   .catch((error) => error.response);
   return response;
 };
 
@@ -75,10 +76,75 @@ const userEdit = async (data) => {
   return response;
 };
 
+const userGetInfo = async () => {
+  const response = await baseReq
+    .get('/users/info')
+    .catch((error) => error.response);
+
+  return response;
+};
+
+const userAuthMail = async (query) => {
+  console.log(query);
+  const response = await baseReq
+    .post(`/users/auth-mail?guid=${query}`)
+    .catch((error) => error.response);
+
+  return response;
+};
+// const userAuthMail = async (data) => {
+//   const response = await baseReq
+//     .post('/users/auth-mail', data)
+//     .catch((error) => error.response);
+
+//   return response;
+// };
+
+const userForgetPassword = async (data) => {
+  console.log(data);
+  const response = await baseReq
+    .put('/users/forget-password-mail', data)
+    .catch((error) => error.response);
+
+  return response;
+};
+
+const userResetPassword = async (data) => {
+  console.log(data);
+  const response = await baseReq
+    .post('/users/mail-reset-password', data)
+    .catch((error) => error.response);
+
+  return response;
+};
+
+const userNewPassword = async (data) => {
+  console.log(data);
+  const response = await baseReq
+    .post('/users/login-reset-password', data)
+    .catch((error) => error.response);
+
+  return response;
+};
+
+const userCheck = async () => {
+  const response = await baseReq
+    .post('/users/check')
+    .catch((error) => error.response);
+
+  return response;
+};
+
 const apiHelper = {
   userSignUp,
+  userAuthMail,
   userLogin,
+  userGetInfo,
   userEdit,
+  userNewPassword,
+  userForgetPassword,
+  userResetPassword,
+  userCheck,
 };
 
 export default apiHelper;
