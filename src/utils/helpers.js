@@ -1,6 +1,9 @@
 import baseReq from './http';
+// import baseReq from './AxiosInterceptors';
+// import { baseReq } from './AxiosInterceptors';
 
 const userSignUp = async (data) => {
+  // console.log(typeof baseReq);
   console.log(data);
   const response = await baseReq
     .post('/users/sign-up', data)
