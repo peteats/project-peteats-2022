@@ -3,9 +3,13 @@ import { Link, Outlet } from 'react-router-dom';
 
 function DevLayout() {
   return (
-    <>
-      <nav>
+    <div className="container mx-auto">
+      <nav className="Navbar">
         <ul className="text-blue-700">
+          <li>
+            <Link to="/layout">DevLayoutHome</Link>
+          </li>
+
           <li>
             <Link to="/">HOME</Link>
           </li>
@@ -40,16 +44,45 @@ function DevLayout() {
         </ul>
       </nav>
 
-      <hr className="h-2 bg-slate-300" />
+      <hr className="bg-slate-300 h-2" />
 
-      <div className="bg-slate-100">
-        <div className="container mx-auto min-h-screen">
+      <div className="Outlet">
+        <div className="min-h-screen">
           <section className="px-4 py-8">
             <Outlet />
           </section>
         </div>
       </div>
-    </>
+
+      <footer
+        className="flex min-h-screen flex-col
+        flex-wrap items-center justify-center px-3"
+      >
+        <div className="">
+          <h3>
+            <img src="" alt="PetEats" />
+          </h3>
+
+          <p className="text-md">Copyright</p>
+
+          <nav className="">
+            <ul className="text-bg-secondary">
+              <li>
+                <Link to="/">HOME</Link>
+              </li>
+
+              <li>
+                <Link to="/">HOME</Link>
+              </li>
+
+              <li>
+                <Link to="/">HOME</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
+    </div>
   );
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
+import DevLayoutHome from './DevLayoutHome';
+
 import DevLayout from './DevLayout';
 import DevHome from './DevHome';
 import DevPage from './DevPage';
@@ -75,6 +77,16 @@ function RoutesConfig() {
         {
           path: '/*',
           element: <PageNotFound />,
+        },
+      ],
+    },
+    {
+      path: '/layout',
+      element: <DevLayoutHome />,
+      children: [
+        {
+          index: true,
+          element: <DevLayoutHome />,
         },
       ],
     },
