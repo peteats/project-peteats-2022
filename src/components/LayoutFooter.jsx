@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import LogoLight from '../images/logo-light.png';
 
-function Footer() {
+function LayoutFooter() {
   return (
     <footer className="bg-[#212529] text-center text-white">
       <div className="container mx-auto flex flex-col items-center justify-between px-3 pt-20 md:flex-row">
@@ -46,5 +46,6 @@ function Footer() {
     </footer>
   );
 }
+/* end of LayoutFooter() */
 
-export default Footer;
+export default LayoutFooter;
