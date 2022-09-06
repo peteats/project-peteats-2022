@@ -61,7 +61,7 @@ function LayoutNavbar() {
 
             <li className="border-b ">
               <Link
-                to="/"
+                to="/login"
                 className="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100  md:p-0 md:hover:bg-transparent"
               >
                 註冊 / 登入
