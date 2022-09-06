@@ -3,6 +3,18 @@ import { toast } from 'react-toastify';
 
 import axiosInstance from './http';
 // #TODO: AxiosInterceptors with toastify fn()
+/**
+ * #NOTE: { theme: 'colored', "dark", "light" }
+ */
+
+// # NOTE: A-1
+function responseHandler({ Status, Message }) {
+  if (!Status) {
+    return toast.error(Message, { theme: 'colored' });
+  }
+  return toast.success('Request success');
+}
+/* end of responseHandler() */
 
 function AxiosInterceptors({ children }) {
   console.log('interceptor');
@@ -10,10 +22,18 @@ function AxiosInterceptors({ children }) {
   useEffect(() => {
     console.log('useEffect');
 
+    // # NOTE: A-1
     const resInterceptor = (response) => {
       console.log('resInterceptor');
 
-      toast.success('Request success');
+      console.log(`
+            [${response.status}] response from
+              [${response.request?.responseURL}]
+            ( at ${new Date()} ).
+          `);
+
+      const { data } = response;
+      responseHandler(data);
 
       return response;
     };
@@ -24,6 +44,8 @@ function AxiosInterceptors({ children }) {
         // redirect logic here
       }
 
+      toast.error('Failed');
+
       return Promise.reject();
     };
 
@@ -31,37 +53,29 @@ function AxiosInterceptors({ children }) {
       resInterceptor,
       errInterceptor,
     );
+    // console.log(axiosInstance.interceptors.response.eject(interceptor));
+    console.log('interceptor::', interceptor);
 
     return () => axiosInstance.interceptors.response.eject(interceptor);
+
+    // const PromiseNotify = () =>
+    //   toast.promise(fetchData(), {
+    //     loading: 'loading...',
+    //     success: 'Successfully get data',
+    //     error: 'error occurs in data',
+    //   });
+
+    // return () => {
+    //   toast.promise(axiosInstance.interceptors.response.eject(interceptor), {
+    //     loading: 'loading...',
+    //     success: 'Successfully get data',
+    //     error: 'error occurs in data',
+    //   });
+    // };
   }, []);
 
   return children;
 }
-
-// axiosInstance.interceptors.request.use(
-//   // axios.interceptors.request.use(
-//   (config) => {
-//     console.log(`
-//       ${config.method.toUpperCase()} request sent to
-//         [${config.url}]
-//       ( at ${new Date()} ).
-//     `);
-
-//     const token = localStorage.getItem('JWT');
-//     if (token) {
-//       const { headers } = config;
-//       headers.Authorization = token;
-
-//       console.log('axios-config:::', config);
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     console.log('interceptors-ERROR:');
-//     return Promise.reject(error);
-//   },
-// );
-// /* end of interceptors-request */
 
 // axiosInstance.interceptors.response.use(
 //   (response) => {
@@ -94,6 +108,31 @@ function AxiosInterceptors({ children }) {
 //   },
 // );
 // /* end of interceptors-response */
+
+// axiosInstance.interceptors.request.use(
+//   // axios.interceptors.request.use(
+//   (config) => {
+//     console.log(`
+//       ${config.method.toUpperCase()} request sent to
+//         [${config.url}]
+//       ( at ${new Date()} ).
+//     `);
+
+//     const token = localStorage.getItem('JWT');
+//     if (token) {
+//       const { headers } = config;
+//       headers.Authorization = token;
+
+//       console.log('axios-config:::', config);
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     console.log('interceptors-ERROR:');
+//     return Promise.reject(error);
+//   },
+// );
+// /* end of interceptors-request */
 
 // eslint-disable-next-line import/prefer-default-export
 // export { AxiosInterceptors };
