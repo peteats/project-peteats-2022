@@ -54,7 +54,7 @@ function DevNavbar() {
 function DevLayout() {
   return (
     <>
-      <DevNavbar />
+      {/* <DevNavbar /> */}
 
       <Navbar />
 

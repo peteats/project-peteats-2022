@@ -45,7 +45,7 @@ function DevLogin() {
   };
 
   return (
-    <>
+    <section className="container mx-auto py-20">
       <p className="text-center text-lg font-bold">LOGIN</p>
 
       <hr />
@@ -100,7 +100,7 @@ function DevLogin() {
           }}
         />
       </form>
-    </>
+    </section>
   );
 }
 

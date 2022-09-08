@@ -15,7 +15,7 @@ function HomeIntro() {
         <li className="w-full pl-8 pb-8 md:w-1/3">
           <div className="">
             <img
-              className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+              className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
               src={Cate}
               alt=""
             />
@@ -29,7 +29,7 @@ function HomeIntro() {
         <li className="w-full pl-8 pb-8 md:w-1/3">
           <div className="">
             <img
-              className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+              className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
               src={Cate}
               alt=""
             />
@@ -43,7 +43,7 @@ function HomeIntro() {
         <li className="w-full pl-8 pb-8 md:w-1/3">
           <div className="">
             <img
-              className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+              className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
               src={Cate}
               alt=""
             />

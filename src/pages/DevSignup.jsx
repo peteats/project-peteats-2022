@@ -39,10 +39,8 @@ function DevSignup() {
   };
 
   return (
-    <>
-      <p className="text-center text-lg font-bold">註冊帳號</p>
-
-      <hr />
+    <section className="container mx-auto min-h-screen py-20">
+      <h3 className="my-4 text-center text-lg font-bold">註冊帳號</h3>
 
       <form
         action=""
@@ -146,7 +144,7 @@ function DevSignup() {
           }}
         />
       </form>
-    </>
+    </section>
   );
 }
 

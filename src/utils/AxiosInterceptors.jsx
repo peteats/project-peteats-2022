@@ -10,9 +10,9 @@ import axiosInstance from './http';
 // # NOTE: A-1
 function responseHandler({ Status, Message }) {
   if (!Status) {
-    return toast.error(Message, { theme: 'colored' });
+    return toast.error(Message || 'Failed', { theme: 'colored' });
   }
-  return toast.success('Request success');
+  return toast.success(Message || 'Request success', { theme: 'colored' });
 }
 /* end of responseHandler() */
 

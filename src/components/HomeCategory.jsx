@@ -5,7 +5,7 @@ import Cate from '../images/Cate.png';
 function HomeCategory() {
   return (
     <div className="container mx-auto px-px md:min-h-[calc(100vh_-_64px)]">
-      <h2 className="my-4 text-center text-3xl font-bold">
+      <h2 className="my-10 text-center text-3xl font-bold">
         快速分類
         <br />
         立即訂購
@@ -16,7 +16,7 @@ function HomeCategory() {
           <a href="/#">
             <div className="">
               <img
-                className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+                className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
                 src={Cate}
                 alt=""
               />
@@ -32,7 +32,7 @@ function HomeCategory() {
           <a href="/#">
             <div className="">
               <img
-                className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+                className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
                 src={Cate}
                 alt=""
               />
@@ -48,7 +48,7 @@ function HomeCategory() {
           <a href="/#">
             <div className="">
               <img
-                className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+                className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
                 src={Cate}
                 alt=""
               />
@@ -64,7 +64,7 @@ function HomeCategory() {
           <a href="/#">
             <div className="">
               <img
-                className="border-bg-primary rounded-lg border-2 border-pink-500 bg-white shadow-md"
+                className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
                 src={Cate}
                 alt=""
               />
