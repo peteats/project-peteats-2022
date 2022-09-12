@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-// import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
+
+import Progress from '../components/Progress/Progress';
 
 import LoadingContext from '../contexts/LoadingContext';
 import axiosInstance from './http';
@@ -14,11 +15,6 @@ import axiosInstance from './http';
 
 // # NOTE: A-1
 function responseHandler({ Status, Message }) {
-  // setTimeout(() => {
-  //   console.log('setLoading');
-  //   setLoading(false);
-  // }, 5000);
-
   if (!Status) {
     return toast.error(Message || 'Failed', { theme: 'dark' });
   }
@@ -98,7 +94,11 @@ function AxiosInterceptors({ children }) {
       }
       console.log('error.config:::', error.config);
 
-      setLoading(false);
+      setTimeout(() => {
+        console.log('setLoading');
+        setLoading(false);
+      }, 5000);
+
       toast.error(`ERROR::: ${error.message}`, { theme: 'dark' });
 
       return Promise.reject(error);
@@ -132,7 +132,10 @@ function AxiosInterceptors({ children }) {
   // return children;
   return (
     <>
+      <Progress isAnimating={isLoading} />
+
       {children}
+
       <div className="fixed bottom-4 right-16">
         <p className="sr-only">LOADING...</p>
 
@@ -146,6 +149,15 @@ function AxiosInterceptors({ children }) {
     </>
   );
 }
+/* end of AxiosInterceptors() */
+
+AxiosInterceptors.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+// eslint-disable-next-line import/prefer-default-export
+// export { AxiosInterceptors };
+export default AxiosInterceptors;
 
 // axiosInstance.interceptors.response.use(
 //   (response) => {
@@ -203,12 +215,3 @@ function AxiosInterceptors({ children }) {
 //   },
 // );
 // /* end of interceptors-request */
-
-// eslint-disable-next-line import/prefer-default-export
-// export { AxiosInterceptors };
-
-AxiosInterceptors.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default AxiosInterceptors;
