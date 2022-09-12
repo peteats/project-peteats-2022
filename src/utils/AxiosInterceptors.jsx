@@ -1,6 +1,11 @@
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+import React, { useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
+import { toast } from 'react-toastify';
+import PacmanLoader from 'react-spinners/PacmanLoader';
+
+import LoadingContext from '../contexts/LoadingContext';
 import axiosInstance from './http';
 // #TODO: AxiosInterceptors with toastify fn()
 /**
@@ -9,6 +14,11 @@ import axiosInstance from './http';
 
 // # NOTE: A-1
 function responseHandler({ Status, Message }) {
+  // setTimeout(() => {
+  //   console.log('setLoading');
+  //   setLoading(false);
+  // }, 5000);
+
   if (!Status) {
     return toast.error(Message || 'Failed', { theme: 'dark' });
   }
@@ -17,32 +27,52 @@ function responseHandler({ Status, Message }) {
 /* end of responseHandler() */
 
 function AxiosInterceptors({ children }) {
-  console.log('interceptor');
+  console.log('AxiosInterceptors');
+  // const [isLoading, setLoading] = useState(false);
+  const { isLoading, setLoading } = LoadingContext.useLoading();
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log('AxiosInterceptors-useEffect');
+
+    // Add a request interceptor
+    axiosInstance.interceptors.request.use(
+      (config) => {
+        // Do something before request is sent
+        console.log('http-req:::', config);
+
+        setLoading(true);
+
+        return config;
+      },
+      (error) => {
+        // Do something with request error
+        console.log(error);
+
+        return Promise.reject(error);
+      },
+    );
 
     // # NOTE: A-1
     const resInterceptor = (response) => {
-      console.log('resInterceptor');
-
-      console.log(`
-            [${response.status}] response from
-              [${response.request?.responseURL}]
-            ( at ${new Date()} ).
-          `);
+      console.log(`resInterceptor-
+        [${response.status}] response from
+        [${response.request?.responseURL}]
+        ( at ${new Date()} ).
+      `);
 
       const { data } = response;
       responseHandler(data);
+
+      setLoading(false);
 
       return response;
     };
 
     const errInterceptor = (error) => {
-      console.log('errInterceptor');
+      console.log('errInterceptor-');
       // status codes falls outside 2xx
       if (error.response && error.response.status === 401) {
-        console.log('redirect logic here');
+        console.log('redirect logic here-');
       }
 
       if (error.response && error.response.data) {
@@ -68,6 +98,7 @@ function AxiosInterceptors({ children }) {
       }
       console.log('error.config:::', error.config);
 
+      setLoading(false);
       toast.error(`ERROR::: ${error.message}`, { theme: 'dark' });
 
       return Promise.reject(error);
@@ -98,7 +129,22 @@ function AxiosInterceptors({ children }) {
     // };
   }, []);
 
-  return children;
+  // return children;
+  return (
+    <>
+      {children}
+      <div className="fixed bottom-4 right-16">
+        <p className="sr-only">LOADING...</p>
+
+        <PacmanLoader
+          color="#DB8C8C"
+          loading={isLoading}
+          // cssOverride={override}
+          size={16}
+        />
+      </div>
+    </>
+  );
 }
 
 // axiosInstance.interceptors.response.use(
@@ -160,5 +206,9 @@ function AxiosInterceptors({ children }) {
 
 // eslint-disable-next-line import/prefer-default-export
 // export { AxiosInterceptors };
+
+AxiosInterceptors.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default AxiosInterceptors;

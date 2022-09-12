@@ -8,5 +8,8 @@
   },
   "editor.quickSuggestions": {
     "strings": true
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   }
 }
