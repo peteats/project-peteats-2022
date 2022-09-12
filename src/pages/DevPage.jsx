@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import apiHelper from '../utils/helpers';
+import Button from '../components/Button';
 
 import logo from '../images/logo.svg';
 import poweredBy from '../images/powered-by-vitawind-dark.png';
 
+function fetchData() {
+  return new Promise((resolve) => {
+    console.log('START');
+    return setTimeout(resolve, 5000);
+  });
+}
+
 function DevPage() {
   const [count, setCount] = useState(0);
   const [resMsg, setResMsg] = useState('');
+  const [isLoading, setLoading] = useState(false);
 
   const saveToken = ({ JwtToken }) => {
     console.log('AUTH_TOKEN:::', JwtToken);
@@ -17,9 +26,26 @@ function DevPage() {
     localStorage.setItem('JWT', AUTH_TOKEN);
   };
 
+  const handleClick = () => {
+    setLoading(true);
+    // setLoading(!isLoading);
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      fetchData().then(() => {
+        setLoading(false);
+      });
+    }
+  }, [isLoading]);
+
   return (
     <div className="text-center selection:bg-green-900">
       <header className="container">
+        <Button disabled={isLoading ? 'disabled' : ''} onClick={handleClick}>
+          {isLoading ? 'Loading...' : 'Click'}
+        </Button>
+
         <input
           type="button"
           value="NEW"
@@ -52,8 +78,11 @@ function DevPage() {
             };
             apiHelper.userSignUp({ user }).then((res) => {
               console.log(res);
-              const { authorization } = res?.headers ?? null;
-              console.log('JWT::', authorization);
+              const { status } = res;
+              if (status) {
+                const { headers } = res;
+                console.log('JWT::', headers?.authorization);
+              }
             });
 
             // const data = {

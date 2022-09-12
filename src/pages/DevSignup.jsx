@@ -13,47 +13,6 @@ function DevSignup() {
   const phoneNumber = useInput('');
   const address = useInput('');
 
-  // Account;
-  // Password;
-  // Name;
-  // MobilePhone;
-  // Address;
-
-  // const passwordConfirm = useInput('');
-
-  // "SingUpVm": {
-  //     "type": "object",
-  //     "description": "註冊帳號",
-  //     "properties": {
-  //       "Account": {
-  //         "type": "string",
-  //         "description": "帳號名稱"
-  //       },
-  //       "Password": {
-  //         "type": "string",
-  //         "description": "密碼"
-  //       },
-  //       "Name": {
-  //         "title": "真實姓名",
-  //         "type": "string",
-  //         "description": "真實姓名",
-  //         "maxLength": 50
-  //       },
-  //       "MobilePhone": {
-  //         "title": "手機號碼",
-  //         "type": "string",
-  //         "description": "手機號碼",
-  //         "maxLength": 50
-  //       },
-  //       "Address": {
-  //         "title": "配送地址",
-  //         "type": "string",
-  //         "description": "配送地址",
-  //         "maxLength": 50
-  //       }
-  //     }
-  //   },
-
   const submitForm = (event) => {
     event.preventDefault();
     console.log('email', email.value);
@@ -80,10 +39,8 @@ function DevSignup() {
   };
 
   return (
-    <>
-      <p className="text-center text-lg font-bold">註冊帳號</p>
-
-      <hr />
+    <section className="container mx-auto min-h-screen py-20">
+      <h3 className="my-4 text-center text-lg font-bold">註冊帳號</h3>
 
       <form
         action=""
@@ -187,7 +144,7 @@ function DevSignup() {
           }}
         />
       </form>
-    </>
+    </section>
   );
 }
 
