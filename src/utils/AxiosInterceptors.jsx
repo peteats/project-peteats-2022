@@ -10,9 +10,9 @@ import axiosInstance from './http';
 // # NOTE: A-1
 function responseHandler({ Status, Message }) {
   if (!Status) {
-    return toast.error(Message || 'Failed', { theme: 'colored' });
+    return toast.error(Message || 'Failed', { theme: 'dark' });
   }
-  return toast.success(Message || 'Request success', { theme: 'colored' });
+  return toast.success(Message || 'Request success', { theme: 'dark' });
 }
 /* end of responseHandler() */
 
@@ -40,13 +40,37 @@ function AxiosInterceptors({ children }) {
 
     const errInterceptor = (error) => {
       console.log('errInterceptor');
-      if (error.response.status === 401) {
-        // redirect logic here
+      // status codes falls outside 2xx
+      if (error.response && error.response.status === 401) {
+        console.log('redirect logic here');
       }
 
-      toast.error('Failed');
+      if (error.response && error.response.data) {
+        toast.error(`ERROR::: ${error.response.data.message}`);
+        // return;
+      }
 
-      return Promise.reject();
+      if (error.response) {
+        // #NOTE: CORS: error.response.data === undefined
+        console.log(error.response.data);
+        // error.response.status === 0
+        console.log(error.response.status);
+        // error.response.data === headers
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log('error.request:::', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error:::', error.message);
+      }
+      console.log('error.config:::', error.config);
+
+      toast.error(`ERROR::: ${error.message}`, { theme: 'dark' });
+
+      return Promise.reject(error);
     };
 
     const interceptor = axiosInstance.interceptors.response.use(

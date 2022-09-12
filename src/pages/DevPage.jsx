@@ -78,8 +78,11 @@ function DevPage() {
             };
             apiHelper.userSignUp({ user }).then((res) => {
               console.log(res);
-              const { authorization } = res?.headers ?? null;
-              console.log('JWT::', authorization);
+              const { status } = res;
+              if (status) {
+                const { headers } = res;
+                console.log('JWT::', headers?.authorization);
+              }
             });
 
             // const data = {
