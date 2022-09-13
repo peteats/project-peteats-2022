@@ -1,14 +1,15 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
-import DevLayoutHome from './DevLayoutHome';
+// import DevLayoutHome from './DevLayoutHome';
 
 import DevLayout from './DevLayout';
 import DevHome from './DevHome';
+import DraftShops from './DraftShops';
+
 import DevPage from './DevPage';
 import DevSignup from './DevSignup';
 import DevLogin from './DevLogin';
-import DevShops from './DevShops';
 import DevMe from './DevMe';
 import DevSetting from './DevSetting';
 import DevReset from './DevReset';
@@ -41,7 +42,7 @@ function RoutesConfig() {
         },
         {
           path: '/shops',
-          element: <DevShops />,
+          element: <DraftShops />,
         },
 
         // /me/settings
@@ -82,11 +83,11 @@ function RoutesConfig() {
     },
     {
       path: '/layout',
-      element: <DevLayoutHome />,
+      element: <DraftShops />,
       children: [
         {
           index: true,
-          element: <DevLayoutHome />,
+          element: <DraftShops />,
         },
       ],
     },

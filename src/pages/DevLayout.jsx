@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-import Navbar from '../components/LayoutNavbar';
+// import Navbar from '../components/LayoutNavbar';
 import Footer from '../components/LayoutFooter';
 
 function DevNavbar() {
@@ -9,7 +9,7 @@ function DevNavbar() {
     <nav className="DevNavbar">
       <ul className="text-blue-700">
         <li>
-          <Link to="/layout">DevLayoutHome</Link>
+          <Link to="/layout">WIP-layout</Link>
         </li>
 
         <li>
