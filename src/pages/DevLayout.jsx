@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-// import Navbar from '../components/LayoutNavbar';
+import Navbar from '../components/LayoutNavbar';
 import Footer from '../components/LayoutFooter';
 
 function DevNavbar() {
@@ -54,9 +54,9 @@ function DevNavbar() {
 function DevLayout() {
   return (
     <>
-      <DevNavbar />
+      {/* <DevNavbar /> */}
 
-      {/* <Navbar /> */}
+      <Navbar />
 
       <Outlet />
 
