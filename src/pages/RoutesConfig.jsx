@@ -11,7 +11,9 @@ import Draft4 from '../draft/Draft4';
 import Draft5 from '../draft/Draft5';
 import Draft6 from '../draft/Draft6';
 import Draft7 from '../draft/Draft7';
-// import Draft8 from '../draft/Draft8';
+import Draft8 from '../draft/Draft8';
+import Draft9 from '../draft/Draft9';
+import Draft10 from '../draft/Draft10';
 // import DraftShops from '../draft/DraftShops';
 
 import DevPage from '../draft/DevPage';
@@ -60,6 +62,18 @@ function RoutesConfig() {
         {
           path: '/page7',
           element: <Draft7 />,
+        },
+        {
+          path: '/page8',
+          element: <Draft8 />,
+        },
+        {
+          path: '/page9',
+          element: <Draft9 />,
+        },
+        {
+          path: '/page10',
+          element: <Draft10 />,
         },
 
         {

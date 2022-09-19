@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Store from '../images/Store.png';
 import Area from '../images/Area.png';

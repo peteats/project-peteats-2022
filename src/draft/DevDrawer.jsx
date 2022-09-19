@@ -130,6 +130,9 @@ function Drawer() {
           <DrawerLink linkPath="page5" linkName="page5" setHide={setHide} />
           <DrawerLink linkPath="page6" linkName="page6" setHide={setHide} />
           <DrawerLink linkPath="page7" linkName="page7" setHide={setHide} />
+          <DrawerLink linkPath="page8" linkName="page8" setHide={setHide} />
+          <DrawerLink linkPath="page9" linkName="page9" setHide={setHide} />
+          <DrawerLink linkPath="page10" linkName="page10" setHide={setHide} />
           <DrawerLink linkPath="404" linkName="404" setHide={setHide} />
           <DrawerLink linkPath="dev" linkName="dev" setHide={setHide} />
         </ul>
