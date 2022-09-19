@@ -4,37 +4,6 @@ import PropTypes from 'prop-types';
 import imgStore from '../images/Store.png';
 // import Area from '../images/Area.png';
 
-function OrderItem() {
-  return (
-    <li>
-      <div className="mb-6">
-        <div className="flex items-start justify-between gap-4  md:grid md:grid-cols-7 md:grid-rows-1">
-          <section className="flex justify-between  md:col-span-5">
-            <h4 className="">TITLE</h4>
-
-            <span className="hidden  md:block md:w-1/5">$100</span>
-            {/* end of RWD-PC-price */}
-          </section>
-
-          <div className="flex w-2/5 items-center justify-evenly  md:col-span-2 md:w-full md:flex-row">
-            {/* #REVIEW: wired about flex mix grid of RWD */}
-            <p>-</p>
-            <p>1</p>
-            <p>+</p>
-          </div>
-          {/* end of items-Btn */}
-        </div>
-
-        <p className="md:hidden md:w-1/5">$100</p>
-        {/* end of RWD-mobile-price */}
-
-        <small className="text-xs">info</small>
-      </div>
-    </li>
-  );
-}
-/* end of OrderItem */
-
 function SummaryItem() {
   return (
     <li className="mb-6  md:mb-6">
@@ -89,6 +58,37 @@ function OrderSummaryList() {
   );
 }
 /* end of OrderSummaryList */
+
+function OrderItem() {
+  return (
+    <li>
+      <div className="mb-6">
+        <div className="flex items-start justify-between gap-4  md:grid md:grid-cols-7 md:grid-rows-1">
+          <section className="flex justify-between  md:col-span-5">
+            <h4 className="">TITLE</h4>
+
+            <span className="hidden  md:block md:w-1/5">$100</span>
+            {/* end of RWD-PC-price */}
+          </section>
+
+          <div className="flex w-2/5 items-center justify-evenly  md:col-span-2 md:w-full md:flex-row">
+            {/* #REVIEW: wired about flex mix grid of RWD */}
+            <p>-</p>
+            <p>1</p>
+            <p>+</p>
+          </div>
+          {/* end of items-Btn */}
+        </div>
+
+        <p className="md:hidden md:w-1/5">$100</p>
+        {/* end of RWD-mobile-price */}
+
+        <small className="text-xs">info</small>
+      </div>
+    </li>
+  );
+}
+/* end of OrderItem */
 
 function OrderList() {
   return (
