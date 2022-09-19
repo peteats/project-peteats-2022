@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Cate from '../images/Cate.png';
+// import Cate from '../images/Cate.png';
 
 function HomeCategory({ data }) {
   const { Id, ProductClassName } = data;
+
+  const Cate = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Cate.png';
 
   return (
     <div className="container mx-auto px-px md:min-h-[calc(100vh_-_64px)]">
