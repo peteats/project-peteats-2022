@@ -1,175 +1,193 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import apiHelper from '../utils/helpers';
 
 import HomeHero from '../components/HomeHero';
 import HomeCategory from '../components/HomeCategory';
 import HomeArea from '../components/HomeArea';
 import HomeIntro from '../components/HomeIntro';
-
-import Store from '../images/Store.png';
-// import Cate from '../images/Cate.png';
-
-// function StoreCard() {
-//   return (
-//     <div className="rounded-lg border border-gray-200 bg-white shadow-md">
-//       <img className="rounded-t-lg" src={Cate} alt="" />
-
-//       <div className="p-5">
-//         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-//           2022
-//         </h5>
-
-//         <p className="mb-3 font-normal text-gray-700">Here are the</p>
-//       </div>
-//     </div>
-//   );
-// }
-
-function StoreList() {
-  return (
-    <section className="container mx-auto px-12 md:p-0">
-      <h2 className="my-10 text-center text-3xl font-bold">
-        精選推薦
-        <br />
-        熱門店家
-      </h2>
-
-      <ul className="-ml-8 -mb-8 flex flex-wrap">
-        <li className="w-full pl-8 pb-6 md:w-1/4">
-          <div className="">
-            <picture className="block rounded-2xl">
-              <img
-                src={Store}
-                alt=""
-                className="z-0 block h-full w-full rounded-2xl object-cover"
-              />
-            </picture>
-
-            <section className="relative z-10 -mt-11 flex flex-col rounded-2xl bg-[#DB8C8C] py-4 px-6 shadow-xl">
-              <div className="flex justify-between">
-                <p>CITY</p>
-                <p>ICON</p>
-              </div>
-
-              <h3 className="py-3">STORE</h3>
-
-              <span>4.6</span>
-            </section>
-          </div>
-        </li>
-
-        <li className="w-full pl-8 pb-6 md:w-1/4">
-          <div className="">
-            <picture className="block rounded-2xl">
-              <img
-                src={Store}
-                alt=""
-                className="z-0 block h-full w-full rounded-2xl object-cover"
-              />
-            </picture>
-
-            <section className="relative z-10 -mt-11 flex flex-col rounded-2xl bg-[#DB8C8C] py-4 px-6 shadow-xl">
-              <div className="flex justify-between">
-                <p>CITY</p>
-                <p>ICON</p>
-              </div>
-
-              <h3 className="py-3">STORE</h3>
-
-              <span>4.6</span>
-            </section>
-          </div>
-        </li>
-
-        <li className="w-full pl-8 pb-6 md:w-1/4">
-          <div className="">
-            <picture className="block rounded-2xl">
-              <img
-                src={Store}
-                alt=""
-                className="z-0 block h-full w-full rounded-2xl object-cover"
-              />
-            </picture>
-
-            <section className="relative z-10 -mt-11 flex flex-col rounded-2xl bg-[#DB8C8C] py-4 px-6 shadow-xl">
-              <div className="flex justify-between">
-                <p>CITY</p>
-                <p>ICON</p>
-              </div>
-
-              <h3 className="py-3">STORE</h3>
-
-              <span>4.6</span>
-            </section>
-          </div>
-        </li>
-
-        <li className="w-full pl-8 pb-6 md:w-1/4">
-          <div className="">
-            <picture className="block rounded-2xl">
-              <img
-                src={Store}
-                alt=""
-                className="z-0 block h-full w-full rounded-2xl object-cover"
-              />
-            </picture>
-
-            <section className="relative z-10 -mt-11 flex flex-col rounded-2xl bg-[#DB8C8C] py-4 px-6 shadow-xl">
-              <div className="flex justify-between">
-                <p>CITY</p>
-                <p>ICON</p>
-              </div>
-
-              <h3 className="py-3">STORE</h3>
-
-              <span>4.6</span>
-            </section>
-          </div>
-        </li>
-      </ul>
-
-      {/* <ul className="-ml-8 -mb-8 flex flex-wrap">
-        <li className="w-full pl-8 pb-8 md:w-1/3">
-          <div className="">
-            <a href="/#">
-              <StoreCard />
-            </a>
-          </div>
-        </li>
-
-        <li className="w-full pl-8 pb-8 md:w-1/3">
-          <div className="">
-            <a href="/#">
-              <StoreCard />
-            </a>
-          </div>
-        </li>
-
-        <li className="w-full pl-8 pb-8 md:w-1/3">
-          <div className="">
-            <a href="/#">
-              <StoreCard />
-            </a>
-          </div>
-        </li>
-      </ul> */}
-    </section>
-  );
-}
+import HomeShops from '../components/HomeShops';
 
 function DevHome() {
+  const [cateData, setCateData] = useState([]);
+
   return (
     <>
+      <div
+        className="container mx-auto
+        flex min-h-screen items-center justify-center px-4"
+      >
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getShopClass().then((res) => {
+            console.log(res);
+
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data?.Data);
+
+              const { Data } = res.data;
+              setCateData(Data);
+            }
+          })}
+        >
+          1-getShopClass
+        </button>
+
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getShopCity().then((res) => {
+            console.log(res);
+
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data);
+
+              const { Message } = res.data;
+              console.log(Message[0]);
+              // setCateData(Data);
+            }
+          })}
+        >
+          2-getShopCity
+        </button>
+
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getShopHot().then((res) => {
+            console.log(res);
+
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data);
+
+              const { Message } = res.data;
+              console.log(Message[0]);
+              // setCateData(Data);
+            }
+          })}
+        >
+          3-getShopHot
+        </button>
+
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getShopTag().then((res) => {
+            console.log(res);
+
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data);
+
+              const { data } = res.data;
+              console.log(data[0]);
+              // setCateData(Data);
+            }
+          })}
+        >
+          4-getShopTag
+        </button>
+
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getShopByCity().then((res) => {
+            console.log(res);
+
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data?.Data);
+
+              const { Data } = res.data;
+              console.log(Data[0]);
+              // setCateData(Data);
+            }
+          })}
+        >
+          5-getShopByCity
+        </button>
+
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getMenu().then((res) => {
+            console.log(res);
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data);
+
+              const { Message } = res.data;
+              console.log(Message[0]);
+              // setCateData(Data);
+            }
+          })}
+        >
+          6-getMenu
+        </button>
+
+        <button
+          type="button"
+          className="block rounded-lg border border-gray-200 bg-white p-0.5
+          text-center text-sm font-medium text-gray-900
+          hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none
+          focus:ring-4 focus:ring-gray-200
+          dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
+          dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+          onClick={() => apiHelper.getMenuItem().then((res) => {
+            console.log(res);
+            if (res?.data?.Status) {
+              console.log('getShopClass:::', res?.data);
+
+              const { Data, DetailList } = res.data;
+              console.log(DetailList[0]);
+              // setCateData(Data);
+            }
+          })}
+        >
+          7-getMenuItem
+        </button>
+      </div>
+
       <HomeHero />
 
-      <HomeCategory />
+      <HomeCategory data={cateData} />
 
       <HomeArea />
 
-      <StoreList />
+      <HomeShops />
 
       <HomeIntro />
     </>
   );
 }
+/* end of DevHome() */
 
 export default DevHome;

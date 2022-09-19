@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Cate from '../images/Cate.png';
 
-function HomeCategory() {
+function HomeCategory({ data }) {
+  const { Id, ProductClassName } = data;
+
   return (
     <div className="container mx-auto px-px md:min-h-[calc(100vh_-_64px)]">
       <h2 className="my-10 text-center text-3xl font-bold">
@@ -79,5 +82,10 @@ function HomeCategory() {
     </div>
   );
 }
+/* end of HomeCategory() */
+
+HomeCategory.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+};
 
 export default HomeCategory;

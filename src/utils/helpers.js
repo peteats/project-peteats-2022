@@ -87,6 +87,57 @@ const userCheck = async () => {
 
   return response;
 };
+/* end of API-users */
+
+const getShopClass = async () => {
+  const response = await baseReq.get('/home/shop').catch((error) => error);
+
+  return response;
+};
+
+const getShopCity = async () => {
+  const response = await baseReq.get('/home/city').catch((error) => error);
+
+  return response;
+};
+
+const getShopHot = async () => {
+  const response = await baseReq.get('/home/hot').catch((error) => error);
+
+  return response;
+};
+
+const getShopTag = async () => {
+  const response = await baseReq
+    .get('/shop/tag?ProductClassId=1')
+    .catch((error) => error);
+
+  return response;
+};
+
+const getShopByCity = async () => {
+  const response = await baseReq
+    .get('/shop/local/city?Id=1')
+    .catch((error) => error);
+
+  return response;
+};
+
+const getMenu = async () => {
+  const response = await baseReq
+    .get('/shop/shop-id/menu?ShopId=2')
+    .catch((error) => error);
+
+  return response;
+};
+
+const getMenuItem = async () => {
+  const response = await baseReq
+    .get('/shop/shop-id/menu/item-id?ProductId=7')
+    .catch((error) => error);
+
+  return response;
+};
 
 const apiHelper = {
   userSignUp,
@@ -98,6 +149,14 @@ const apiHelper = {
   userForgetPassword,
   userResetPassword,
   userCheck,
+
+  getShopClass,
+  getShopCity,
+  getShopHot,
+  getShopTag,
+  getShopByCity,
+  getMenu,
+  getMenuItem,
 };
 
 export default apiHelper;
