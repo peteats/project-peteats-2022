@@ -7,10 +7,10 @@ import PageNotFound from './PageNotFound';
 import DevHome from '../draft/DevHome';
 import Draft2 from '../draft/Draft2';
 import Draft3 from '../draft/Draft3';
-// import Draft4 from '../draft/Draft4';
-// import Draft5 from '../draft/Draft5';
-// import Draft6 from '../draft/Draft6';
-// import Draft7 from '../draft/Draft7';
+import Draft4 from '../draft/Draft4';
+import Draft5 from '../draft/Draft5';
+import Draft6 from '../draft/Draft6';
+import Draft7 from '../draft/Draft7';
 // import Draft8 from '../draft/Draft8';
 // import DraftShops from '../draft/DraftShops';
 
@@ -45,22 +45,22 @@ function RoutesConfig() {
           path: '/page3',
           element: <Draft3 />,
         },
-        // {
-        //   path: '/page4',
-        //   element: <Draft4 />,
-        // },
-        // {
-        //   path: '/page5',
-        //   element: <Draft5 />,
-        // },
-        // {
-        //   path: '/page6',
-        //   element: <Draft6 />,
-        // },
-        // {
-        //   path: '/page7',
-        //   element: <Draft7 />,
-        // },
+        {
+          path: '/page4',
+          element: <Draft4 />,
+        },
+        {
+          path: '/page5',
+          element: <Draft5 />,
+        },
+        {
+          path: '/page6',
+          element: <Draft6 />,
+        },
+        {
+          path: '/page7',
+          element: <Draft7 />,
+        },
 
         {
           path: '/signup',
