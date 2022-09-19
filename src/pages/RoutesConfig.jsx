@@ -6,7 +6,7 @@ import PageNotFound from './PageNotFound';
 
 import DevHome from '../draft/DevHome';
 import Draft2 from '../draft/Draft2';
-import DraftShops from '../draft/DraftShops';
+// import DraftShops from '../draft/DraftShops';
 // import Draft3 from '../draft/Draft3';
 // import Draft4 from '../draft/Draft4';
 // import Draft5 from '../draft/Draft5';
@@ -41,26 +41,26 @@ function RoutesConfig() {
           path: '/page2',
           element: <Draft2 />,
         },
-        {
-          path: '/page3',
-          element: <Draft3 />,
-        },
-        {
-          path: '/page4',
-          element: <Draft4 />,
-        },
-        {
-          path: '/page5',
-          element: <Draft5 />,
-        },
-        {
-          path: '/page6',
-          element: <Draft6 />,
-        },
-        {
-          path: '/page7',
-          element: <Draft7 />,
-        },
+        // {
+        //   path: '/page3',
+        //   element: <Draft3 />,
+        // },
+        // {
+        //   path: '/page4',
+        //   element: <Draft4 />,
+        // },
+        // {
+        //   path: '/page5',
+        //   element: <Draft5 />,
+        // },
+        // {
+        //   path: '/page6',
+        //   element: <Draft6 />,
+        // },
+        // {
+        //   path: '/page7',
+        //   element: <Draft7 />,
+        // },
 
         {
           path: '/signup',
@@ -70,10 +70,11 @@ function RoutesConfig() {
           path: '/login',
           element: <DevLogin />,
         },
-        {
-          path: '/shops',
-          element: <DraftShops />,
-        },
+
+        // {
+        //   path: '/shops',
+        //   element: <DraftShops />,
+        // },
 
         // /me/settings
         {
@@ -111,16 +112,16 @@ function RoutesConfig() {
         },
       ],
     },
-    {
-      path: '/layout',
-      element: <DraftShops />,
-      children: [
-        {
-          index: true,
-          element: <DraftShops />,
-        },
-      ],
-    },
+    // {
+    //   path: '/layout',
+    //   element: <DraftShops />,
+    //   children: [
+    //     {
+    //       index: true,
+    //       element: <DraftShops />,
+    //     },
+    //   ],
+    // },
   ]);
 }
 

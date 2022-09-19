@@ -124,12 +124,12 @@ function Drawer() {
         {/* end of Drawer-Header */}
 
         <ul className="flex flex-col gap-4">
-          <DrawerLink linkPath="page1" linkName="page1" setHide={setHide} />
           <DrawerLink linkPath="page2" linkName="page2" setHide={setHide} />
           <DrawerLink linkPath="page3" linkName="page3" setHide={setHide} />
           <DrawerLink linkPath="page4" linkName="page4" setHide={setHide} />
           <DrawerLink linkPath="page5" linkName="page5" setHide={setHide} />
           <DrawerLink linkPath="page6" linkName="page6" setHide={setHide} />
+          <DrawerLink linkPath="page7" linkName="page7" setHide={setHide} />
           <DrawerLink linkPath="404" linkName="404" setHide={setHide} />
           <DrawerLink linkPath="dev" linkName="dev" setHide={setHide} />
         </ul>
