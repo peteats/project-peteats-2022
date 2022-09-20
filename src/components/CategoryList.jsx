@@ -38,10 +38,10 @@ function CategoryList({ classRow }) {
       {/* <ul className="block w-full"> */}
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap"> */}
       <ul className={ulClassName}>
-        {cateData.map((item) => {
-          console.log('!', item);
-          return <CategoryItem key={item.Id} data={item} />;
-        })}
+        {cateData.map((item) => (
+          // console.log('!', item);
+          <CategoryItem key={item.Id} data={item} />
+        ))}
       </ul>
     </>
   );

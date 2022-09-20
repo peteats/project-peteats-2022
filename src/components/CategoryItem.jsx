@@ -36,7 +36,9 @@ function CategoryItem({ data }) {
 /* end of CategoryItem() */
 
 CategoryItem.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  data: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.number]),
+  ).isRequired,
 };
 /* end of CategoryItem.propTypes */
 
