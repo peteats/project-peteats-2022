@@ -109,7 +109,8 @@ function SectionAreaSmall() {
 //           />
 //         </picture>
 
-//         <section className="relative z-10 -mt-11 flex flex-col rounded-2xl bg-[#DB8C8C] py-4 px-6 shadow-xl">
+//         <section className="relative z-10 -mt-11 flex flex-col
+// rounded-2xl bg-[#DB8C8C] py-4 px-6 shadow-xl">
 //           <div className="flex justify-between">
 //             <p>{ShopAddress.match(regexpCity)}</p>
 //             <p>ICON</p>
@@ -150,6 +151,7 @@ function SectionAreaSmall() {
 //         }
 //       });
 //     }
+// /* end of IF(!length) */
 //   }, [shopsData]);
 
 //   return (

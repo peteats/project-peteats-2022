@@ -139,10 +139,10 @@ function DevHome() {
           focus:ring-4 focus:ring-gray-200
           dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
           dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
-          onClick={() => apiHelper.getMenu().then((res) => {
+          onClick={() => apiHelper.getInfoMenu(2).then((res) => {
             console.log(res);
             if (res?.data?.Status) {
-              console.log('getMenu:::', res?.data);
+              console.log('getInfoMenu:::', res?.data);
 
               const { Message } = res.data;
               console.log(Message[0]);
@@ -150,7 +150,7 @@ function DevHome() {
             }
           })}
         >
-          6-getMenu
+          6-getInfoMenu
         </button>
 
         <button

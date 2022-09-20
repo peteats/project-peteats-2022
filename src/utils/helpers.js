@@ -126,9 +126,12 @@ const getShopsByCity = async () => {
   return response;
 };
 
-const getMenu = async () => {
+const getInfoMenu = async (query) => {
+  console.log(query);
+  // =${query}
+
   const response = await baseReq
-    .get('/shop/shop-id/menu?ShopId=2')
+    .get(`/shop/shop-id/menu?ShopId=${query}`)
     .catch((error) => error);
 
   return response;
@@ -158,7 +161,7 @@ const apiHelper = {
   getShopsByTag,
   getShopsByCity,
   getShopHot,
-  getMenu,
+  getInfoMenu,
   getMenuItem,
 };
 
