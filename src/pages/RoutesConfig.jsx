@@ -44,6 +44,10 @@ function RoutesConfig() {
           element: <Draft2 />,
         },
         {
+          path: '/shops/tag/:tagId',
+          element: <Draft2 />,
+        },
+        {
           path: '/page3',
           element: <Draft3 />,
         },
