@@ -25,11 +25,11 @@ function DevHome() {
           focus:ring-4 focus:ring-gray-200
           dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
           dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
-          onClick={() => apiHelper.getShopClass().then((res) => {
+          onClick={() => apiHelper.getShopTag().then((res) => {
             console.log(res);
 
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data?.Data);
+              console.log('getShopTag:::', res?.data?.Data);
 
               const { Data } = res.data;
               setCateData(Data);
@@ -51,7 +51,7 @@ function DevHome() {
             console.log(res);
 
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data);
+              console.log('getShopCity:::', res?.data);
 
               const { Message } = res.data;
               console.log(Message[0]);
@@ -74,7 +74,7 @@ function DevHome() {
             console.log(res);
 
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data);
+              console.log('getShopHot:::', res?.data);
 
               const { Message } = res.data;
               console.log(Message[0]);
@@ -93,11 +93,11 @@ function DevHome() {
           focus:ring-4 focus:ring-gray-200
           dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400
           dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
-          onClick={() => apiHelper.getShopTag().then((res) => {
+          onClick={() => apiHelper.getShopsByTag(1).then((res) => {
             console.log(res);
 
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data);
+              console.log('getShopsByTag:::', res?.data);
 
               const { data } = res.data;
               console.log(data[0]);
@@ -105,7 +105,7 @@ function DevHome() {
             }
           })}
         >
-          4-getShopTag
+          4-getShopsByTag
         </button>
 
         <button
@@ -120,7 +120,7 @@ function DevHome() {
             console.log(res);
 
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data?.Data);
+              console.log('getShopByCity:::', res?.data?.Data);
 
               const { Data } = res.data;
               console.log(Data[0]);
@@ -142,7 +142,7 @@ function DevHome() {
           onClick={() => apiHelper.getMenu().then((res) => {
             console.log(res);
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data);
+              console.log('getMenu:::', res?.data);
 
               const { Message } = res.data;
               console.log(Message[0]);
@@ -164,10 +164,11 @@ function DevHome() {
           onClick={() => apiHelper.getMenuItem().then((res) => {
             console.log(res);
             if (res?.data?.Status) {
-              console.log('getShopClass:::', res?.data);
+              console.log('getMenuItem:::', res?.data);
 
               const { Data, DetailList } = res.data;
               console.log(DetailList[0]);
+              console.log(Data[0]);
               // setCateData(Data);
             }
           })}

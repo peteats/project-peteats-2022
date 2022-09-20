@@ -101,7 +101,8 @@ function Drawer() {
         <h5
           id="drawer-label"
           className="mb-4 inline-flex items-center text-lg font-semibold
-          text-gray-500 dark:text-gray-400"
+          text-gray-500 hover:text-gray-900
+          dark:hover:text-white/80"
         >
           <Link to="/">Draft</Link>
         </h5>
@@ -123,7 +124,8 @@ function Drawer() {
         </button>
         {/* end of Drawer-Header */}
 
-        <ul className="flex flex-col gap-4">
+        <ul className="grid grid-flow-row grid-cols-2 gap-4">
+          {/* <ul className="flex flex-col gap-4"> */}
           <DrawerLink linkPath="page2" linkName="page2" setHide={setHide} />
           <DrawerLink linkPath="page3" linkName="page3" setHide={setHide} />
           <DrawerLink linkPath="page4" linkName="page4" setHide={setHide} />

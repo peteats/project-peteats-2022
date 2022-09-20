@@ -89,7 +89,7 @@ const userCheck = async () => {
 };
 /* end of API-users */
 
-const getShopClass = async () => {
+const getShopTag = async () => {
   const response = await baseReq.get('/home/shop').catch((error) => error);
 
   return response;
@@ -107,15 +107,18 @@ const getShopHot = async () => {
   return response;
 };
 
-const getShopTag = async () => {
+const getShopsByTag = async (query) => {
+  console.log(query);
+
   const response = await baseReq
-    .get('/shop/tag?ProductClassId=1')
+    // .get('/shop/tag?ProductClassId=1')
+    .get(`/shop/tag?ProductClassId=${query}`)
     .catch((error) => error);
 
   return response;
 };
 
-const getShopByCity = async () => {
+const getShopsByCity = async () => {
   const response = await baseReq
     .get('/shop/local/city?Id=1')
     .catch((error) => error);
@@ -150,11 +153,11 @@ const apiHelper = {
   userResetPassword,
   userCheck,
 
-  getShopClass,
-  getShopCity,
-  getShopHot,
   getShopTag,
-  getShopByCity,
+  getShopCity,
+  getShopsByTag,
+  getShopsByCity,
+  getShopHot,
   getMenu,
   getMenuItem,
 };
