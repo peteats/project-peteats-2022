@@ -39,6 +39,7 @@ function RoutesConfig() {
           path: '/dev',
           element: <DevPage />,
         },
+
         {
           path: '/page2',
           element: <Draft2 />,
@@ -51,6 +52,11 @@ function RoutesConfig() {
           path: '/page3',
           element: <Draft3 />,
         },
+        {
+          path: '/shops/:shopId',
+          element: <Draft3 />,
+        },
+
         {
           path: '/page4',
           element: <Draft4 />,
