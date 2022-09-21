@@ -17,6 +17,8 @@ function DevHome() {
         className="container mx-auto
         flex min-h-screen items-center justify-center px-4"
       >
+        <hr />
+
         <button
           type="button"
           className="block rounded-lg border border-gray-200 bg-white p-0.5

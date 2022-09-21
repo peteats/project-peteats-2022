@@ -11,8 +11,8 @@ function CategoryItem({ data }) {
 
   return (
     <li className="w-full pl-8 pb-8 md:w-1/2">
-      {/* /shops/tag/:id */}
       <Link to={`/shops/tag/${Id}`}>
+        {/* /shops/tag/:id */}
         <div className="">
           <img
             className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
