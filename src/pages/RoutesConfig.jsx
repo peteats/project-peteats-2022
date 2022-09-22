@@ -1,8 +1,11 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+// import { useRoutes, useLocation } from 'react-router-dom';
 
 import LayoutMain from './LayoutMain';
 import PageNotFound from './PageNotFound';
+
+import Modal from '../components/Modal';
 
 import DevHome from '../draft/DevHome';
 import Draft2 from '../draft/Draft2';
@@ -25,6 +28,9 @@ import DevReset from '../draft/DevReset';
 // import Redirect from './Redirect';
 
 function RoutesConfig() {
+  // const location = useLocation();
+  // const background = location.state && location.state.background;
+
   return useRoutes([
     {
       path: '/',
@@ -55,6 +61,17 @@ function RoutesConfig() {
         {
           path: '/shops/:shopId',
           element: <Draft3 />,
+          // location: background || location,
+        },
+        {
+          path: '/shops/:shopId/menu/:itemId',
+          element: <Draft3 />,
+          // location: background,
+        },
+        {
+          path: '/shops/:shopId/menu/:optionId/modal',
+          element: <Modal />,
+          // location: background,
         },
 
         {
