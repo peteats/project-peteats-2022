@@ -75,6 +75,7 @@ const userResetPassword = async (data) => {
 
 const userNewPassword = async (data) => {
   console.log(data);
+
   const response = await baseReq
     .post('/users/login-reset-password', data)
     .catch((error) => error);
@@ -137,9 +138,98 @@ const getInfoMenu = async (query) => {
   return response;
 };
 
-const getMenuItem = async () => {
+const getMenuItem = async (query) => {
+  console.log(query);
+  // =${query}
+
   const response = await baseReq
-    .get('/shop/shop-id/menu/item-id?ProductId=7')
+    .get(`/shop/shop-id/menu/item-id?ProductId=${query}`)
+    .catch((error) => error);
+
+  return response;
+};
+/* end of API-GET */
+
+const getCart = async () => {
+  const response = await baseReq.get('/cart/content').catch((error) => error);
+
+  return response;
+};
+
+const addItemToCart = async ({ clickOptionId, msg, amount }) => {
+  // const addItemToCart = async (query) => {
+  //   console.log(query);
+  //   // =${query}
+  //   const msg = 'hi';
+  //   const amount = 1;
+
+  const response = await baseReq
+    .post(
+      `/cart/AddProduct?ProductDetailId=${clickOptionId}&Memo=${msg}&Amount=${amount}`,
+    )
+    .catch((error) => error);
+
+  return response;
+};
+
+const editCart = async ({
+  itemId, detailId, amount, msg,
+}) => {
+  // console.log(query);
+  // =${query}
+
+  // const msg = 'edit';
+  // const amount = 13;
+  // const detailId = 11;
+
+  // #TODO: WIP
+  const response = await baseReq
+    .put(
+      `/cart/item?Id=${itemId}&ProductDetailId=${detailId}&Amount=${amount}&Memo=${msg}`,
+    )
+    .catch((error) => error);
+
+  return response;
+};
+
+const deleteCart = async (query) => {
+  console.log(query);
+  // =${query}
+
+  const response = await baseReq
+    .delete(`/cart/delete?Id=${query}`)
+    .catch((error) => error);
+
+  return response;
+};
+
+const getHistoryOrder = async () => {
+  const response = await baseReq
+    .get('/order/Order-history')
+    .catch((error) => error);
+
+  return response;
+};
+
+const checkoutCart = async ({ Id, paymentId, deliveryId }) => {
+  // const deliveryId = 1;
+  // const paymentId = 1;
+
+  const response = await baseReq
+    .get(
+      `/cart/send?UserId=${Id}&PaymentId=${paymentId}&ProductDeliveryId=${deliveryId}`,
+    )
+    .catch((error) => error);
+
+  return response;
+};
+/* end of API-cart */
+
+const orderPay = async (query) => {
+  console.log(query);
+
+  const response = await baseReq
+    .post(`/order/pay?Id=${query}`)
     .catch((error) => error);
 
   return response;
@@ -163,6 +253,15 @@ const apiHelper = {
   getShopHot,
   getInfoMenu,
   getMenuItem,
+
+  getCart,
+  addItemToCart,
+  editCart,
+  deleteCart,
+  checkoutCart,
+
+  orderPay,
+  getHistoryOrder,
 };
 
 export default apiHelper;
