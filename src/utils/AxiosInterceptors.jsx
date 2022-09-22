@@ -38,6 +38,15 @@ function AxiosInterceptors({ children }) {
 
         setLoading(true);
 
+        // #TODO: createContext()
+        const token = localStorage.getItem('JWT');
+        if (token) {
+          const { headers } = config;
+          headers.Authorization = token;
+
+          console.log('axios-config:::', config);
+        }
+
         return config;
       },
       (error) => {
