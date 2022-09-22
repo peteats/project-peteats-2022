@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CloseIcon from '@mui/icons-material/Close';
 
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+
+import apiHelper from '../utils/helpers';
+
 function DevNavbar() {
   return (
     <nav className="text-xs text-gray-700 hover:text-white/50">
@@ -84,6 +88,13 @@ function Drawer() {
   //   setTimeout(() => '', 5000);
   //   return 'rotate-180 animate-spin delay-100';
   // }
+
+  const saveToken = ({ JwtToken }) => {
+    console.log('AUTH_TOKEN:::', JwtToken);
+    const AUTH_TOKEN = `Bearer ${JwtToken}`;
+    // setToken(JwtToken);
+    localStorage.setItem('JWT', AUTH_TOKEN);
+  };
 
   return (
     <>
@@ -167,6 +178,41 @@ function Drawer() {
         <span className="sr-only">Toggle Drawer</span>
       </button>
       {/* end of Btn-setting */}
+
+      <button
+        type="button"
+        className={` ${
+          isHide ? 'ml-0 duration-700 ease-out' : 'ml-40 ease-in'
+        }  
+        fixed top-[20vh] block cursor-pointer rounded-tr-md rounded-br-md
+        bg-gray-800/80 p-2 text-center shadow-sm 
+        shadow-gray-500/40 `}
+        onClick={() => {
+          console.log('LOG-IN');
+
+          const data = {
+            Account: 'maord@pm.me',
+            Password: 'Aa000000',
+          };
+          apiHelper.userLogin(data).then((res) => {
+            console.log(res);
+
+            saveToken(res?.data);
+          });
+          /* end of userLogin() */
+        }}
+      >
+        <div
+          className={` ${
+            isHide ? '' : 'duration-900 rotate-[1turn] transition-all ease-in'
+          } 
+          bg-transparent' rounded-full `}
+        >
+          <VpnKeyIcon sx={{ color: '#fff', fontSize: '24px' }} />
+        </div>
+
+        <span className="sr-only">DEV</span>
+      </button>
     </>
   );
 }
