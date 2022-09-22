@@ -3,15 +3,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import apiHelper from '../utils/helpers';
-
 import CategoryItem from './CategoryItem';
 
-function CategoryList({ classRow }) {
-  // #REVIEW: context.Provider
+function CategoryList({ isFlexWrap }) {
+  // #REVIEW: context.Provider?
   const [cateData, setCateData] = useState([]);
-
-  // #REVIEW: clean
-  const ulClassName = classRow === 2 ? '-ml-8 -mb-8 flex flex-wrap' : '-ml-8 -mb-8 flex';
 
   useEffect(() => {
     if (!cateData.length) {
@@ -24,9 +20,16 @@ function CategoryList({ classRow }) {
           const { Data } = res.data;
           setCateData(Data);
         }
+        /* end of IF(Status) */
       });
     }
   }, [cateData]);
+  /* end of useEffect() */
+
+  if (!cateData) {
+    return <h2>LOADING...</h2>;
+  }
+  /* end of IF(!data) */
 
   return (
     <>
@@ -35,21 +38,25 @@ function CategoryList({ classRow }) {
         {cateData.length}
       </code>
 
-      {/* <ul className="block w-full"> */}
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap"> */}
-      <ul className={ulClassName}>
+      <ul className={`-ml-8 -mb-8 flex  ${isFlexWrap}`}>
         {cateData.map((item) => (
           // console.log('!', item);
-          <CategoryItem key={item.Id} data={item} />
+          <CategoryItem key={item.Id} item={item} />
         ))}
+        {/* end of data.map() */}
       </ul>
     </>
   );
 }
 /* end of CategoryList() */
 
+CategoryList.defaultProps = {
+  isFlexWrap: '',
+};
+
 CategoryList.propTypes = {
-  classRow: PropTypes.number.isRequired,
+  isFlexWrap: PropTypes.string,
 };
 /* end of CategoryList.propTypes */
 

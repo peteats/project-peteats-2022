@@ -90,6 +90,7 @@ const userCheck = async () => {
 };
 /* end of API-users */
 
+// 2-1
 const getShopTag = async () => {
   const response = await baseReq.get('/home/shop').catch((error) => error);
 

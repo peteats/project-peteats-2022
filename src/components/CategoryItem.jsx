@@ -6,8 +6,13 @@ import { Link } from 'react-router-dom';
 
 const Cate = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Cate.png';
 
-function CategoryItem({ data }) {
-  const { Id, ProductClassName } = data;
+function CategoryItem({ item }) {
+  const { Id, ProductClassName, imageUrl } = item;
+
+  if (!item) {
+    return <h2>LOADING...</h2>;
+  }
+  /* end of IF(!data) */
 
   return (
     <li className="w-full pl-8 pb-8 md:w-1/2">
@@ -16,8 +21,8 @@ function CategoryItem({ data }) {
         <div className="">
           <img
             className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
-            src={Cate}
-            alt="CategoryItem"
+            src={imageUrl || Cate}
+            alt={ProductClassName || 'CategoryItem'}
           />
 
           <h5 className="-mt-12 pl-4 text-2xl font-bold tracking-tight text-white">
@@ -27,16 +32,12 @@ function CategoryItem({ data }) {
         </div>
       </Link>
     </li>
-    // <li>
-    //   {Id}
-    //   <p>{ProductClassName}</p>
-    // </li>
   );
 }
 /* end of CategoryItem() */
 
 CategoryItem.propTypes = {
-  data: PropTypes.objectOf(
+  item: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.number]),
   ).isRequired,
 };

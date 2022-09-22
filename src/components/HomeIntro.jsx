@@ -57,5 +57,6 @@ function HomeIntro() {
     </div>
   );
 }
+/* end of HomeIntro() */
 
 export default HomeIntro;
