@@ -10,7 +10,7 @@ function CategoryItem({ item }) {
   const { Id, ProductClassName, imageUrl } = item;
 
   if (!item) {
-    return <h2>LOADING...</h2>;
+    return <h3>LOADING...</h3>;
   }
   /* end of IF(!data) */
 
