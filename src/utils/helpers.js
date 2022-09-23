@@ -204,14 +204,6 @@ const deleteCart = async (query) => {
   return response;
 };
 
-const getHistoryOrder = async () => {
-  const response = await baseReq
-    .get('/order/Order-history')
-    .catch((error) => error);
-
-  return response;
-};
-
 const checkoutCart = async ({ Id, paymentId, deliveryId }) => {
   // const deliveryId = 1;
   // const paymentId = 1;
@@ -226,11 +218,38 @@ const checkoutCart = async ({ Id, paymentId, deliveryId }) => {
 };
 /* end of API-cart */
 
+const getHistoryOrders = async () => {
+  const response = await baseReq
+    .get('/order/Order-history')
+    .catch((error) => error);
+
+  return response;
+};
+
+const getOrderDetail = async (query) => {
+  const response = await baseReq
+    // oder/detail?OrderInformationId=41
+    .get(`/oder/detail?OrderInformationId=${query}`)
+    .catch((error) => error);
+
+  return response;
+};
+
 const orderPay = async (query) => {
   console.log(query);
 
   const response = await baseReq
     .post(`/order/pay?Id=${query}`)
+    .catch((error) => error);
+
+  return response;
+};
+
+const reviewOrder = async ({ orderId, rating }) => {
+  // #TODO:
+  const response = await baseReq
+    .get(`/order/feedback?Id=${orderId}&Feedback=${rating}`)
+    // .post(`/order/feedback?Id=${orderId}&Feedback=${rating}`)
     .catch((error) => error);
 
   return response;
@@ -262,7 +281,9 @@ const apiHelper = {
   checkoutCart,
 
   orderPay,
-  getHistoryOrder,
+  getHistoryOrders,
+  getOrderDetail,
+  reviewOrder,
 };
 
 export default apiHelper;
