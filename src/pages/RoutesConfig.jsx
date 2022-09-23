@@ -73,29 +73,54 @@ function RoutesConfig() {
           element: <Modal />,
           // location: background,
         },
-
+        // #REVIEW: change the name
         {
           path: '/page4',
           element: <Draft4 />,
         },
         {
+          path: '/shops/:shopId/cart',
+          element: <Draft4 />,
+        },
+        {
+          path: '/shops/:shopId/cart/reload',
+          element: <Draft4 />,
+        },
+
+        {
           path: '/page5',
           element: <Draft5 />,
         },
         {
+          path: '/shops/:shopId/checkout',
+          element: <Draft5 />,
+        },
+
+        {
           path: '/page6',
           element: <Draft6 />,
+        },
+
+        {
+          path: '/me/orders/:orderId',
+          element: <Draft7 />,
         },
         {
           path: '/page7',
           element: <Draft7 />,
         },
+
         {
           path: '/page8',
           element: <Draft8 />,
         },
         {
-          path: '/page9',
+          path: '/me/orders/:orderId',
+          element: <Draft8 />,
+        },
+
+        {
+          path: '/me/orders/:orderId/review',
           element: <Draft9 />,
         },
         {
