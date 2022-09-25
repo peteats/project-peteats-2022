@@ -15,18 +15,22 @@ function CategoryItem({ item }) {
   /* end of IF(!data) */
 
   return (
-    <li className="w-full pl-8 pb-8 md:w-1/2">
-      <Link to={`/shops/tag/${Id}`}>
+    <li className="pl-4 pb-10 md:w-1/2">
+      {/*  */}
+      <Link to={`/shops/tag/${Id}`} className="block">
         {/* /shops/tag/:id */}
         <div className="">
           <img
-            className="border-bg-primary rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
+            className="max-w-[364px] rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
             src={imageUrl || Cate}
             alt={ProductClassName || 'CategoryItem'}
           />
 
           <h5 className="-mt-12 pl-4 text-2xl font-bold tracking-tight text-white">
-            <span>{Id}</span>
+            <code>
+              {Id}
+              _
+            </code>
             {ProductClassName}
           </h5>
         </div>

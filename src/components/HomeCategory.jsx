@@ -4,17 +4,42 @@ import React from 'react';
 
 import CategoryList from './CategoryList';
 
+const NEKO = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/feature_LayoutOfGET/src/images/bg-neko.png';
+
 function HomeCategory() {
   return (
-    <div className="container mx-auto px-px md:min-h-[calc(100vh_-_64px)]">
-      <h2 className="my-10 text-center text-3xl font-bold">
-        快速分類
-        <br />
-        立即訂購
-      </h2>
+    <>
+      <div className="pe-container mx-auto py-10  md:min-h-screen">
+        {/* <div className="container-md container mx-auto"> */}
+        {/* <div className="container mx-auto px-px md:min-h-[calc(100vh_-_64px)]"> */}
+        <h2 className="my-10 text-center text-3xl font-bold">
+          快速分類
+          <br />
+          立即訂購
+        </h2>
 
-      <CategoryList isFlexWrap="flex-wrap" />
-    </div>
+        {/* <section className="flex justify-between ">
+          <div className="-z-10 -mb-10 -mt-96 flex  w-[74vh] items-end justify-end">
+            <img
+              className="w-full object-cover object-center"
+              src={NEKO}
+              alt=""
+            />
+          </div>
+        </section> */}
+        <CategoryList isFlexWrap="flex-wrap" />
+      </div>
+
+      <div className="-mt-[100vh] flex justify-end md:min-h-screen">
+        <div className="-z-10 mr-24 mb-1 flex w-[590.75px] items-end justify-end">
+          <img
+            className="w-full object-cover object-center"
+            src={NEKO}
+            alt=""
+          />
+        </div>
+      </div>
+    </>
   );
 }
 /* end of HomeCategory() */
