@@ -7,10 +7,10 @@ import apiHelper from '../utils/helpers';
 import ShopItem from './ShopItem';
 
 function ShopList({ queryType, queryId }) {
-  const [shopsData, setShopsData] = useState([]);
+  const [shopsData, setShopsData] = useState(null);
 
   useEffect(() => {
-    if (!shopsData.length && queryType === 'TAG') {
+    if (queryType === 'TAG') {
       apiHelper.getShopsByTag(queryId).then((res) => {
         console.log(res);
 
@@ -23,11 +23,46 @@ function ShopList({ queryType, queryId }) {
         }
       });
     }
-  }, [shopsData]);
+
+    if (queryType === 'CITY') {
+      apiHelper.getShopsByCity(queryId).then((res) => {
+        console.log(res);
+
+        if (res?.data?.Status) {
+          console.log('getShopsByCity:::', res?.data);
+
+          const { Data } = res.data;
+          console.log(Data[0]);
+          setShopsData(Data);
+        }
+      });
+    }
+
+    if (queryType === 'HOT') {
+      apiHelper.getShopsHot().then((res) => {
+        console.log(res);
+
+        if (res?.data?.Status) {
+          console.log('getShopsHot:::', res?.data);
+
+          const { Message } = res.data;
+          console.log(Message[0]);
+          setShopsData(Message);
+        }
+      });
+    }
+  }, [queryId]);
+
+  if (!shopsData) {
+    return <h3>LOADING...</h3>;
+  }
+  /* end of IF(!data) */
 
   return (
-    <section className="container mx-auto my-20 px-12 md:p-0">
-      <h2 className="my-4 text-left text-2xl font-bold">熱門店家</h2>
+    <section className="pe-container mx-auto my-20 px-12 md:p-0">
+      {queryType === 'HOT' ? null : (
+        <h2 className="my-4 text-left text-2xl font-bold">熱門店家</h2>
+      )}
 
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap">
         <StoreCard />
@@ -36,11 +71,15 @@ function ShopList({ queryType, queryId }) {
         <StoreCard />
       </ul> */}
 
-      <ul className="-ml-8 -mb-8 flex flex-wrap">
-        {shopsData.map((item) => (
-          // console.log('!', item);
-          <ShopItem key={item.Id} data={item} />
-        ))}
+      <ul className="-ml-6 -mb-8 flex flex-wrap">
+        {shopsData.map((item) => {
+          console.log('!', item);
+          // apiHelper.getImg(item?.imageUrl).then((res) => {
+          //   console.log('res:', res);
+          // });
+
+          return <ShopItem key={item.Id} data={item} />;
+        })}
       </ul>
     </section>
   );
