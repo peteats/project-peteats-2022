@@ -18,9 +18,9 @@ function AreaItem({ item, size }) {
 
   return (
     <>
-      {console.log()}
+      {/* {console.log()} */}
       {isLarge ? (
-        <li className="w-full pb-28 pl-8 md:w-1/3">
+        <li className="w-full pb-10 pl-6 md:w-1/3">
           <Link to={`/shops/city/${Id}`}>
             {/* /shops/city/:id */}
             <div className="border-bg-primary relative rounded-3xl border-4 border-[#DB8C8C] px-10 pb-6 pt-[50%] text-center hover:bg-[#DB8C8C]">
@@ -30,8 +30,11 @@ function AreaItem({ item, size }) {
                 alt={CityName || 'CityName'}
               />
 
-              <h3 className="mt-3 text-5xl font-bold leading-snug tracking-tight text-black">
-                <span>{Id}</span>
+              <h3 className="mt-8 text-5xl font-bold leading-snug tracking-tight text-black">
+                <code>
+                  {Id}
+                  _
+                </code>
                 {CityName}
               </h3>
             </div>

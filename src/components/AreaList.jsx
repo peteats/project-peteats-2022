@@ -32,7 +32,7 @@ function AreaList({ size }) {
 
   return (
     // <ul className="-ml-8 -mb-8 flex flex-wrap">
-    <ul className={`${isLarge ? '-ml-8' : '-ml-24'} -mb-8  flex flex-wrap`}>
+    <ul className={`${isLarge ? '-ml-6' : '-ml-24'} -mb-8  flex flex-wrap`}>
       {areaData.map((item) => (
         <AreaItem key={item.Id} item={item} size={size} />
       ))}
