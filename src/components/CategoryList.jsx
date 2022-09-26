@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 // import React from 'react';
 import PropTypes from 'prop-types';
 
+import PacmanLoader from 'react-spinners/PacmanLoader';
+
 import apiHelper from '../utils/helpers';
 import CategoryItem from './CategoryItem';
 
@@ -26,8 +28,23 @@ function CategoryList({ isFlexWrap }) {
   }, [cateData]);
   /* end of useEffect() */
 
-  if (!cateData) {
-    return <h2>LOADING...</h2>;
+  if (!cateData.length) {
+    return (
+      <>
+        <h3>LOADING...</h3>
+
+        <section className="flex min-h-[25vh] items-center justify-center">
+          {/* <h3>LOADING...</h3> */}
+
+          <PacmanLoader
+            color="#DB8C8C"
+            loading
+            // cssOverride={override}
+            size={32}
+          />
+        </section>
+      </>
+    );
   }
   /* end of IF(!data) */
 
@@ -40,7 +57,7 @@ function CategoryList({ isFlexWrap }) {
 
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap"> */}
       <ul
-        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}  justify-center md:w-[66%]`}
+        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}  justify-center md:w-[68%]`}
       >
         {cateData.map((item) => (
           // console.log('!', item);
