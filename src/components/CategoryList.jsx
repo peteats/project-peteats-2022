@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 // import React from 'react';
 import PropTypes from 'prop-types';
 
-import PacmanLoader from 'react-spinners/PacmanLoader';
+// import PacmanLoader from 'react-spinners/PacmanLoader';
+
+import RenderLoading from './RenderLoading';
 
 import apiHelper from '../utils/helpers';
 import CategoryItem from './CategoryItem';
@@ -29,22 +31,7 @@ function CategoryList({ isFlexWrap }) {
   /* end of useEffect() */
 
   if (!cateData.length) {
-    return (
-      <>
-        <h3>LOADING...</h3>
-
-        <section className="flex min-h-[25vh] items-center justify-center">
-          {/* <h3>LOADING...</h3> */}
-
-          <PacmanLoader
-            color="#DB8C8C"
-            loading
-            // cssOverride={override}
-            size={32}
-          />
-        </section>
-      </>
-    );
+    return <RenderLoading />;
   }
   /* end of IF(!data) */
 
@@ -56,9 +43,14 @@ function CategoryList({ isFlexWrap }) {
       </code> */}
 
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap"> */}
+      {/* #FIXME: */}
       <ul
-        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}  justify-center md:w-[68%]`}
+        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}  justify-center md:flex-wrap lg:w-[68%]`}
       >
+        {/* <ul
+        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}
+        justify-center bg-slate-400 md:w-[96%] md:flex-col lg:w-[68%]`}
+      > */}
         {cateData.map((item) => (
           // console.log('!', item);
           <CategoryItem key={item.Id} item={item} />
