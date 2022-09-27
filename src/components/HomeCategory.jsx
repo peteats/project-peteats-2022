@@ -82,11 +82,11 @@ function LayoutCategory() {
 function HomeCategory() {
   return (
     <>
-      <div className="min-h-screen w-full bg-[length:590.75px_553.16px] bg-[left_90%_bottom_0px] bg-no-repeat md:bg-home-neko">
+      <div className="min-h-screen w-full bg-[length:590.75px_553.16px] bg-no-repeat sm:min-h-[88vh] sm:bg-home-neko sm:bg-right xl:bg-[left_90%_bottom_0px]">
         {/* <span className="sr-only">neko works finally</span> */}
 
-        <section className="pe-container mx-auto my-20  md:min-h-screen">
-          <h2 className="mb-10 text-center text-3xl font-bold md:mb-16">
+        <section className="pe-container mx-auto mt-40 md:mt-0 xl:min-h-screen">
+          <h2 className="mb-10 text-center text-3xl font-bold md:mt-16 md:p-0 lg:mt-12">
             快速分類
             <br className="md:hidden" />
             <span className="md:pl-4">立即訂購</span>

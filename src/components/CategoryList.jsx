@@ -45,7 +45,7 @@ function CategoryList({ pageType }) {
       <ul
         className={` ${
           pageType === 'HOME'
-            ? 'grid grid-cols-8 grid-rows-2 gap-x-4 gap-y-10 overflow-hidden md:w-full lg:w-[66%]'
+            ? 'grid grid-cols-8 grid-rows-2 gap-x-4 gap-y-10 md:w-full lg:w-[66%]'
             : 'grid grid-flow-row grid-cols-12 gap-6'
         }  z-10 `}
       >

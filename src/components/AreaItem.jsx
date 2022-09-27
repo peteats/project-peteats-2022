@@ -20,10 +20,10 @@ function AreaItem({ item, size }) {
     <>
       {/* {console.log()} */}
       {isLarge ? (
-        <li className="col-span-12 block w-full md:col-span-6 lg:col-span-4">
+        <li className="col-span-12 flex justify-center sm:col-span-6 lg:col-span-4">
           <Link
             to={`/shops/city/${Id}`}
-            className="inline-block w-full rounded-3xl border-4 border-[#DB8C8C] hover:bg-[#DB8C8C]"
+            className="inline-block rounded-3xl border-4 border-[#DB8C8C] px-6 hover:bg-[#DB8C8C] sm:px-0 md:w-full md:px-2"
           >
             {/* /shops/city/:id */}
             <div className="flex flex-col items-center justify-center py-6">

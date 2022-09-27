@@ -19,17 +19,21 @@ function CategoryItem({ item, pageType }) {
   return (
     <li
       className={` ${
-        pageType === 'HOME' ? 'box col-span-8 md:col-span-4' : 'col-span-3'
+        pageType === 'HOME' ? 'box col-span-8 sm:col-span-4' : 'col-span-3'
       }  `}
     >
       {/* <li className="pl-4 pb-10 lg:w-1/2"> */}
       {/*  */}
-      <Link to={`/shops/tag/${Id}`} className="">
+      <Link
+        to={`/shops/tag/${Id}`}
+        className="inline-flex w-full items-center justify-center"
+      >
         {/* /shops/tag/:id */}
         <div
-          className={` ${pageType === 'HOME' ? 'h-[320px]' : 'h-[136px]'}  `}
+          className={` ${pageType === 'HOME' ? 'w-[364px]' : 'h-[136px]'}  `}
         >
           <img
+            loading="lazy"
             className="h-full w-full rounded-lg border-2 border-[#DB8C8C] object-cover object-center shadow-md"
             src={imageUrl || Cate}
             alt={ProductClassName || 'CategoryItem'}

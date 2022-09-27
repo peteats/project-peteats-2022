@@ -8,8 +8,8 @@ import HeroMd from '../images/hero-pattern-md.png';
 
 function HomeHero() {
   return (
-    <header className="min-h-[90vh] sm:min-h-[75vh] md:min-h-[60vh] lg:min-h-[calc(100vh_-_64px)]">
-      <div className="pe-container relative z-10 flex min-h-[calc(100vh_-_64px)] items-end justify-center md:items-center md:justify-end">
+    <header className="min-h-[90vh] sm:min-h-[75vh] sm:pt-16 md:min-h-[60vh] lg:min-h-[50vh] xl:min-h-[calc(100vh_-_64px)]">
+      <div className="pe-container relative z-10 flex min-h-screen items-end justify-center sm:min-h-[75vh] md:min-h-[88vh] md:items-center md:justify-end">
         <section className="sm:pb-20 md:w-[50%] md:pb-40 lg:w-[40%] lg:pb-0">
           <picture className="block">
             <img
