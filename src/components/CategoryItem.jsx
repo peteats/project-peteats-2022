@@ -1,38 +1,47 @@
 import React from 'react';
 // import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { Link } from 'react-router-dom';
+
+import Skeleton from '@mui/material/Skeleton';
 
 const Cate = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Cate.png';
 
-function CategoryItem({ item }) {
+function CategoryItem({ item, pageType }) {
   const { Id, ProductClassName, imageUrl } = item;
 
   if (!item) {
-    return <h3>LOADING...</h3>;
+    // return <h3>LOADING...</h3>;
+    return <Skeleton variant="rectangular" width={364} height={320} />;
   }
   /* end of IF(!data) */
 
   return (
-    <li className="pl-4 pb-10 md:w-1/2">
+    <li
+      className={` ${
+        pageType === 'HOME' ? 'box col-span-8 md:col-span-4' : 'col-span-3'
+      }  `}
+    >
+      {/* <li className="pl-4 pb-10 lg:w-1/2"> */}
       {/*  */}
-      <Link to={`/shops/tag/${Id}`} className="block">
+      <Link to={`/shops/tag/${Id}`} className="">
         {/* /shops/tag/:id */}
-        <div className="">
+        <div
+          className={` ${pageType === 'HOME' ? 'h-[320px]' : 'h-[136px]'}  `}
+        >
           <img
-            className="max-w-[364px] rounded-lg border-2 border-[#DB8C8C] bg-white shadow-md"
+            className="h-full w-full rounded-lg border-2 border-[#DB8C8C] object-cover object-center shadow-md"
             src={imageUrl || Cate}
             alt={ProductClassName || 'CategoryItem'}
           />
 
-          <h5 className="-mt-12 pl-4 text-2xl font-bold tracking-tight text-white">
-            <code>
+          <h3 className="-mt-12 pl-4 text-2xl font-bold tracking-tight text-white">
+            {/* <code>
               {Id}
               _
-            </code>
+            </code> */}
             {ProductClassName}
-          </h5>
+          </h3>
         </div>
       </Link>
     </li>

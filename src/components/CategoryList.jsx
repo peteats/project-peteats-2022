@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 // import React from 'react';
 import PropTypes from 'prop-types';
 
-// import PacmanLoader from 'react-spinners/PacmanLoader';
-
+import apiHelper from '../utils/helpers';
 import RenderLoading from './RenderLoading';
 
-import apiHelper from '../utils/helpers';
 import CategoryItem from './CategoryItem';
 
-function CategoryList({ isFlexWrap }) {
+function CategoryList({ pageType }) {
   // #REVIEW: context.Provider?
   const [cateData, setCateData] = useState([]);
 
@@ -45,15 +43,15 @@ function CategoryList({ isFlexWrap }) {
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap"> */}
       {/* #FIXME: */}
       <ul
-        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}  justify-center md:flex-wrap lg:w-[68%]`}
+        className={` ${
+          pageType === 'HOME'
+            ? 'grid grid-cols-8 grid-rows-2 gap-x-4 gap-y-10 overflow-hidden md:w-full lg:w-[66%]'
+            : 'grid grid-flow-row grid-cols-12 gap-6'
+        }  z-10 `}
       >
-        {/* <ul
-        className={`z-10 -ml-4 -mb-10 flex  ${isFlexWrap}
-        justify-center bg-slate-400 md:w-[96%] md:flex-col lg:w-[68%]`}
-      > */}
         {cateData.map((item) => (
           // console.log('!', item);
-          <CategoryItem key={item.Id} item={item} />
+          <CategoryItem key={item.Id} item={item} pageType={pageType} />
         ))}
         {/* end of data.map() */}
       </ul>
@@ -63,11 +61,11 @@ function CategoryList({ isFlexWrap }) {
 /* end of CategoryList() */
 
 CategoryList.defaultProps = {
-  isFlexWrap: '',
+  pageType: 'HOME',
 };
 
 CategoryList.propTypes = {
-  isFlexWrap: PropTypes.string,
+  pageType: PropTypes.string,
 };
 /* end of CategoryList.propTypes */
 
