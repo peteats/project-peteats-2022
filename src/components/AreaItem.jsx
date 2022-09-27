@@ -20,17 +20,23 @@ function AreaItem({ item, size }) {
     <>
       {/* {console.log()} */}
       {isLarge ? (
-        <li className="w-full pb-10 pl-6 md:w-1/3">
-          <Link to={`/shops/city/${Id}`}>
+        <li className="col-span-12 block w-full md:col-span-6 lg:col-span-4">
+          <Link
+            to={`/shops/city/${Id}`}
+            className="inline-block w-full rounded-3xl border-4 border-[#DB8C8C] hover:bg-[#DB8C8C]"
+          >
             {/* /shops/city/:id */}
-            <div className="border-bg-primary relative rounded-3xl border-4 border-[#DB8C8C] px-10 pb-6 pt-[50%] text-center hover:bg-[#DB8C8C]">
-              <img
-                className="absolute top-12 left-1/2 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover shadow-xl"
-                src={AREA_IMG || imageUrl}
-                alt={CityName || 'CityName'}
-              />
+            <div className="flex flex-col items-center justify-center py-6">
+              <picture className="relative z-10 -mt-[30%] block w-[280px]">
+                <img
+                  loading="lazy"
+                  alt={CityName || 'CityName'}
+                  className="h-full w-full rounded-full object-cover object-center shadow-xl"
+                  src={AREA_IMG || imageUrl}
+                />
+              </picture>
 
-              <h3 className="mt-8 text-5xl font-bold leading-snug tracking-tight text-black">
+              <h3 className="mt-6 text-center text-5xl font-bold leading-snug tracking-tight text-black">
                 <code>
                   {Id}
                   _
