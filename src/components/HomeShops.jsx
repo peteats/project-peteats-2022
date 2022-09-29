@@ -5,41 +5,34 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 import ShopList from './ShopList';
 
-const BG_FOOD = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/feature_LayoutOfGET/src/images/home-bg-food.png';
+// const FAKE_IMAGE = 'https://fakeimg.pl/300x200/';
 
 function HomeShops() {
   return (
     <>
-      <section className="pe-container mx-auto my-20">
-        {/* md:min-h-screen */}
-        <h2 className="text-center text-3xl font-bold">
-          精選推薦
-          {/* <br /> */}
-          <span className="pl-4">熱門店家</span>
-        </h2>
+      {/*  */}
+      <div className="min-h-screen w-full bg-[length:224px_196px] bg-[left_92%_top_0px] bg-no-repeat md:min-h-[88vh] md:bg-home-food md:py-1">
+        <section className="pe-container mx-auto min-h-[50vh]">
+          <h2 className="mb-10 pt-20 text-center text-3xl font-bold">
+            精選推薦
+            <br className="md:hidden" />
+            <span className="md:pl-4">熱門店家</span>
+          </h2>
 
-        <ShopList queryType="HOT" />
+          <ShopList queryType="HOT" />
 
-        <Link
-          to="/shops"
-          className="mx-auto block w-1/5 rounded-sm border border-[#343A40] py-2 px-5 text-center text-xl text-[#343A40]"
-        >
-          {/* /orders/:id */}
-          查看更多店家
-          <span className="pl-2">
-            <ArrowRightAltIcon />
-          </span>
-        </Link>
-      </section>
-
-      <div className="-mt-[100vh] flex justify-end md:min-h-screen">
-        <div className="-z-10 mr-24 mb-1 flex w-[304px] items-start justify-start">
-          <img
-            className="w-full object-cover object-center"
-            src={BG_FOOD}
-            alt=""
-          />
-        </div>
+          <Link
+            to="/shops"
+            className="mx-auto mt-12 block max-w-fit cursor-pointer rounded-sm border border-[#343A40] py-2 px-4 text-center text-xl text-[#343A40] md:px-5"
+          >
+            {/* /orders/:id */}
+            查看更多店家
+            <i className="pl-2">
+              {/* #FIXME: */}
+              <ArrowRightAltIcon />
+            </i>
+          </Link>
+        </section>
       </div>
     </>
   );
