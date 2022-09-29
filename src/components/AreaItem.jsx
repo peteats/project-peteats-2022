@@ -48,23 +48,25 @@ function AreaItem({ item, size }) {
         </li>
       ) : (
         /* end of style-Large */
-        <li className="w-full pl-24 pb-6 md:w-1/3">
+        <li className="col-span-11 pl-[12%] sm:col-span-6 md:col-span-6 lg:col-span-4">
           <Link
-            to={`/shops/city/${Id}`}
-            className="block rounded-3xl bg-[#212529] text-center"
+            to="/shops/city"
+            className="inline-flex h-[75%] w-full rounded-3xl bg-[#212529] hover:bg-[#DB8C8C]"
           >
-            <div
-              className="relative rounded-2xl
-              bg-[#212529] text-center hover:bg-[#DB8C8C]"
-            >
-              <img
-                className="absolute top-1/2 -left-2 h-auto w-2/5 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover object-center shadow-xl"
-                src={AREA_IMG || imageUrl}
-                alt={CityName || 'CityName'}
-              />
+            <div className="flex items-center">
+              <picture className="relative z-10 -ml-[16%] block w-[120px]">
+                <img
+                  className="h-full w-full rounded-full object-cover object-center shadow-xl"
+                  src={AREA_IMG || imageUrl}
+                  alt={CityName || 'CityName'}
+                />
+              </picture>
 
-              <h3 className="py-1 text-4xl font-bold leading-snug tracking-tight text-white">
-                <span>{Id}</span>
+              <h3 className="p-4 text-center text-3xl font-bold leading-snug tracking-tight text-white">
+                {/* <code>
+                  {Id}
+                  _
+                </code> */}
                 {CityName}
               </h3>
             </div>

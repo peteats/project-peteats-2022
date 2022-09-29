@@ -1,9 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import AreaList from './AreaList';
+// import AreaList from './AreaList';
 
 const AREA_IMG = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Area.png';
+
+function ItemGridUI() {
+  return (
+    <>
+      {/*  */}
+      <li className="col-span-11 pl-[16%] sm:col-span-6 md:col-span-6 lg:col-span-4">
+        <Link
+          to="/shops/city"
+          className="inline-flex h-[75%] w-full rounded-3xl bg-[#212529] hover:bg-[#DB8C8C]"
+        >
+          <div className="flex items-center">
+            <picture className="relative z-10 -ml-[16%] block w-[120px]">
+              <img
+                className="h-full w-full rounded-full object-cover object-center shadow-xl"
+                src={AREA_IMG}
+                alt=""
+              />
+            </picture>
+
+            <h3 className="p-4 text-center text-5xl font-bold leading-snug tracking-tight text-white">
+              City
+            </h3>
+            {/* <section className="h-full w-full rounded-3xl bg-[#212529] py-4 hover:bg-[#DB8C8C]">
+            </section> */}
+          </div>
+        </Link>
+      </li>
+    </>
+  );
+}
+/* end of ItemUI() */
+
+function AreaGridUI() {
+  return (
+    <>
+      {/*  */}
+      <ul className="grid grid-flow-row grid-cols-12 gap-6">
+        <ItemUI />
+        <ItemUI />
+        <ItemUI />
+      </ul>
+    </>
+  );
+}
+/* end of AreaUI() */
 
 function ItemLayout() {
   return (
