@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 const AREA_IMG = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Area.png';
 
-function AreaItem({ item, size }) {
+function AreaItem({ item, pageType }) {
   const { Id, CityName, imageUrl } = item;
 
   // #REVIEW: something weird
-  const isLarge = size !== 'small';
+  const isPageHome = pageType === 'HOME';
 
   if (!item) {
     return <h3>LOADING...</h3>;
@@ -19,7 +19,7 @@ function AreaItem({ item, size }) {
   return (
     <>
       {/* {console.log()} */}
-      {isLarge ? (
+      {isPageHome ? (
         <li className="col-span-12 flex justify-center sm:col-span-6 lg:col-span-4">
           <Link
             to={`/shops/city/${Id}`}
@@ -27,20 +27,22 @@ function AreaItem({ item, size }) {
           >
             {/* /shops/city/:id */}
             <div className="flex flex-col items-center justify-center py-6">
-              <picture className="relative z-10 -mt-[30%] block w-[280px]">
+              <picture className="relative z-10 -mt-[30%] block h-[280px] w-[280px]">
+                {/* #NOTE: setting the height and weight to shows `Square` */}
                 <img
                   loading="lazy"
                   alt={CityName || 'CityName'}
                   className="h-full w-full rounded-full object-cover object-center shadow-xl"
-                  src={AREA_IMG || imageUrl}
+                  src={imageUrl || AREA_IMG}
+                  // src={AREA_IMG || imageUrl}
                 />
               </picture>
 
               <h3 className="mt-6 text-center text-5xl font-bold leading-snug tracking-tight text-black">
-                <code>
+                {/* <code>
                   {Id}
                   _
-                </code>
+                </code> */}
                 {CityName}
               </h3>
             </div>
@@ -84,7 +86,7 @@ AreaItem.propTypes = {
     PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.number]),
   ).isRequired,
 
-  size: PropTypes.string.isRequired,
+  pageType: PropTypes.string.isRequired,
 };
 /* end of AreaItem.propTypes */
 

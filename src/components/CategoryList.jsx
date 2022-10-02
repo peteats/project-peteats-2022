@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import apiHelper from '../utils/helpers';
 
-import SkeletonCategory from './SkeletonCategory';
+import CategorySkeleton from './CategorySkeleton';
 import CategoryItem from './CategoryItem';
 
 function CategoryList({ pageType }) {
@@ -40,7 +40,7 @@ function CategoryList({ pageType }) {
 
   if (!cateData.length || !isFetch) {
     // if (!cateData.length) {
-    return <SkeletonCategory pageType={pageType} />;
+    return <CategorySkeleton pageType={pageType} />;
   }
   /* end of IF(!data) */
 

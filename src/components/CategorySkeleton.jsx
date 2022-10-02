@@ -9,14 +9,24 @@ function CategorySkeleton({ pageType }) {
   const SkeletonItem = (
     <li className="col-span-3">
       <div className="h-[136px]">
-        <Skeleton height="100%" variant="rounded" animation="wave" />
+        <Skeleton
+          sx={{ borderRadius: '20px' }}
+          height="100%"
+          variant="rounded"
+          animation="wave"
+        />
       </div>
     </li>
   );
   const SkeletonHomeCategory = (
     <li className="box col-span-8 md:col-span-4">
       <div className="h-[320px]">
-        <Skeleton height="100%" variant="rounded" animation="wave" />
+        <Skeleton
+          sx={{ borderRadius: '20px' }}
+          height="100%"
+          variant="rounded"
+          animation="wave"
+        />
       </div>
     </li>
   );

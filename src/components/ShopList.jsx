@@ -61,7 +61,7 @@ function ShopList({ queryType, queryId }) {
   const LoadingItem = (
     <li className="col-span-12 sm:col-span-4 md:col-span-4 lg:col-span-3">
       <Skeleton
-        sx={{ height: '267px', borderRadius: '6px' }}
+        sx={{ height: '360px', borderRadius: '20px' }}
         // className="rounded-sm"
         animation="wave"
         variant="rounded"
@@ -76,6 +76,7 @@ function ShopList({ queryType, queryId }) {
 
         <ul className="grid grid-flow-row auto-rows-auto grid-cols-12 place-content-center gap-4 px-6 sm:px-0">
           {/* <LoadingItem /> */}
+          {LoadingItem}
           {LoadingItem}
           {LoadingItem}
           {LoadingItem}
