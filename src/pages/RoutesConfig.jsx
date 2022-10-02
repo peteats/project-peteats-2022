@@ -5,6 +5,9 @@ import { useRoutes } from 'react-router-dom';
 import LayoutMain from './LayoutMain';
 import PageHome from './PageHome';
 import PageShops from './PageShops';
+import SubShopLayout from './SubShopLayout';
+import SubShopMenu from './SubShopMenu';
+import SubShopCart from './SubShopCart';
 
 import PageNotFound from './PageNotFound';
 
@@ -49,11 +52,6 @@ function RoutesConfig() {
         },
 
         {
-          path: '/wip',
-          element: <PageShops />,
-        },
-
-        {
           path: '/shops',
           element: <PageShops />,
           // element: <Draft2 />,
@@ -67,6 +65,54 @@ function RoutesConfig() {
           path: '/shops/city/:cityId',
           // path: '/shops/city/:tagId',
           element: <PageShops />,
+        },
+        /* end of shops-routes */
+
+        // {
+        //   path: '/shops/:shopId',
+        //   element: <PageShopMenu />,
+        //   // element: <Draft3 />,
+        //   // location: background || location,
+        // },
+        {
+          path: '/shops/:shopId',
+          element: <SubShopLayout />,
+          children: [
+            {
+              index: true,
+              element: <SubShopMenu />,
+            },
+            {
+              path: 'cart',
+              element: <SubShopCart />,
+            },
+          ],
+        },
+
+        {
+          path: '/wip',
+          element: <PageShops />,
+        },
+
+        {
+          path: '/page3',
+          element: <Draft3 />,
+        },
+        {
+          path: '/shops/:shopId/menu/:itemId',
+          element: <Draft3 />,
+          // location: background,
+        },
+        {
+          path: '/shops/:shopId/menu/:itemId/:optionId',
+          element: <Draft3 />,
+          // location: background,
+        },
+
+        {
+          path: '/shops/:shopId/menu/:optionId/modal',
+          element: <Modal />,
+          // location: background,
         },
 
         {
@@ -129,41 +175,6 @@ function RoutesConfig() {
         //   path: '/auth-mail',
         //   element: <Redirect to="/auth" />,
         // },
-
-        {
-          path: '/page2',
-          element: <Draft2 />,
-        },
-
-        {
-          path: '/page3',
-          element: <Draft3 />,
-        },
-        // {
-        //   path: '/shops/3',
-        //   element: <Draft3 />,
-        // },
-        {
-          path: '/shops/:shopId',
-          element: <Draft3 />,
-          // location: background || location,
-        },
-        {
-          path: '/shops/:shopId/menu/:itemId',
-          element: <Draft3 />,
-          // location: background,
-        },
-        {
-          path: '/shops/:shopId/menu/:itemId/:optionId',
-          element: <Draft3 />,
-          // location: background,
-        },
-
-        {
-          path: '/shops/:shopId/menu/:optionId/modal',
-          element: <Modal />,
-          // location: background,
-        },
 
         // #REVIEW: change the name
         {
