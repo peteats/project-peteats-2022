@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-// import React from 'react';
 import PropTypes from 'prop-types';
 
 import apiHelper from '../utils/helpers';
-import RenderLoading from './RenderLoading';
 
+import SkeletonCategory from './SkeletonCategory';
 import CategoryItem from './CategoryItem';
 
 function CategoryList({ pageType }) {
   // #REVIEW: context.Provider?
   const [cateData, setCateData] = useState([]);
+  const [isFetch, setIsFetch] = useState(null);
 
   useEffect(() => {
     if (!cateData.length) {
@@ -20,16 +20,27 @@ function CategoryList({ pageType }) {
           console.log('getShopTag:::', res?.data?.Data);
 
           const { Data } = res.data;
-          setCateData(Data);
+          if (!isFetch) {
+            setCateData(Data);
+          }
+          /* end of IF(!isFetch) */
         }
         /* end of IF(Status) */
       });
+      /* end of API */
     }
+    return () => {
+      setTimeout(() => {
+        setIsFetch(true);
+      }, 500);
+      /* end of setTimeout() */
+    };
   }, [cateData]);
   /* end of useEffect() */
 
-  if (!cateData.length) {
-    return <RenderLoading />;
+  if (!cateData.length || !isFetch) {
+    // if (!cateData.length) {
+    return <SkeletonCategory pageType={pageType} />;
   }
   /* end of IF(!data) */
 
@@ -41,7 +52,6 @@ function CategoryList({ pageType }) {
       </code> */}
 
       {/* <ul className="-ml-8 -mb-8 flex flex-wrap"> */}
-      {/* #FIXME: */}
       <ul
         className={` ${
           pageType === 'HOME'
@@ -50,7 +60,6 @@ function CategoryList({ pageType }) {
         }  z-10 `}
       >
         {cateData.map((item) => (
-          // console.log('!', item);
           <CategoryItem key={item.Id} item={item} pageType={pageType} />
         ))}
         {/* end of data.map() */}
