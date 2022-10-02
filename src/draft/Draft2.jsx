@@ -1,6 +1,7 @@
 import React from 'react';
 // import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useMatch } from 'react-router-dom';
+import AreaList from '../components/AreaList';
 
 // import PropTypes from 'prop-types';
 
@@ -190,21 +191,52 @@ function SectionAreaSmall() {
 // export default PageShops;
 
 function Draft2() {
-  const { tagId } = useParams();
+  // const { tagId } = useParams();
+  const { tagId, cityId } = useParams();
+  // const isTagRoute = useMatch('/shops/tag/:tagId');
+  // const isCityRoute = useMatch('/shops/city/:tagId');
+
+  // #TODO: API
 
   return (
     <>
-      <div className="container mx-auto my-20 px-1">
-        <ShopList queryType="TAG" queryId={tagId} />
-
-        <h2>
-          This is a dynamic page for
+      <section className="pe-container mx-auto mb-10 px-12 sm:px-2 md:p-0">
+        <pre className="hidden">
+          {console.log('2-tagId:', tagId)}
+          {console.log('2-cityId:', cityId)}
+          This is a dynamic page for_
           {tagId}
-        </h2>
-        <CategoryList classRow={4} />
-      </div>
+        </pre>
 
-      <SectionAreaSmall />
+        <h2 className="mb-6 pt-20 text-left text-2xl font-bold">商家一覽</h2>
+
+        {/* <ShopList queryType={tagId || cityId} queryId={tagId} /> */}
+        <ShopList
+          queryType={tagId ? 'TAG' : 'CITY'}
+          queryId={tagId || cityId}
+        />
+        {/* <ShopList queryType="TAG" queryId={tagId} /> */}
+      </section>
+
+      <section className="pe-container mx-auto my-20 px-6 sm:px-2 md:p-0">
+        <h2 className="mb-6 text-left text-2xl font-bold">快速分類</h2>
+
+        <CategoryList pageType="SHOP" />
+      </section>
+
+      <section className="pe-container mx-auto my-20 px-4 sm:p-2 md:p-0">
+        <h2 className="mb-8 text-left text-2xl font-bold">地區分類</h2>
+
+        <AreaList pageType="SHOP" />
+      </section>
+
+      <section className="pe-container mx-auto my-20 px-12 sm:px-2 md:p-0">
+        <h2 className="my-6 text-left text-2xl font-bold">熱門店家</h2>
+
+        <ShopList queryType="HOT" />
+      </section>
+
+      {/* <SectionAreaSmall /> */}
       {/* <StoreList /> */}
     </>
   );
