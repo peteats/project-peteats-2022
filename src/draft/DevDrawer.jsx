@@ -137,8 +137,11 @@ function Drawer() {
 
         <ul className="grid grid-flow-row grid-cols-2 gap-4">
           {/* <ul className="flex flex-col gap-4"> */}
+          <DrawerLink linkPath="shops" linkName="2_Shops" setHide={setHide} />
           <DrawerLink linkPath="page2" linkName="page2" setHide={setHide} />
+
           <DrawerLink linkPath="page3" linkName="page3" setHide={setHide} />
+          <DrawerLink linkPath="shops/3" linkName="page3" setHide={setHide} />
           <DrawerLink linkPath="page4" linkName="page4" setHide={setHide} />
           <DrawerLink linkPath="page5" linkName="page5" setHide={setHide} />
           <DrawerLink linkPath="page6" linkName="page6" setHide={setHide} />
@@ -148,6 +151,7 @@ function Drawer() {
           <DrawerLink linkPath="page10" linkName="page10" setHide={setHide} />
           <DrawerLink linkPath="404" linkName="404" setHide={setHide} />
           <DrawerLink linkPath="dev" linkName="dev" setHide={setHide} />
+          <DrawerLink linkPath="wip" linkName="WIP" setHide={setHide} />
         </ul>
 
         <DevNavbar />
@@ -191,8 +195,8 @@ function Drawer() {
           console.log('LOG-IN');
 
           const data = {
-            Account: 'maord@pm.me',
-            Password: 'Aa000000',
+            Account: 'maord@proton.me',
+            Password: 't8cBTsmY',
           };
           apiHelper.userLogin(data).then((res) => {
             console.log(res);
