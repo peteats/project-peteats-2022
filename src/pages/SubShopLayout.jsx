@@ -4,6 +4,8 @@ import { Outlet, useParams } from 'react-router-dom';
 import apiHelper from '../utils/helpers';
 import PrintResponse from '../components/DevPrintResponse';
 
+import SectionShopInfo from '../components/SectionShopInfo';
+
 function SubShopLayout() {
   const { shopId, itemId } = useParams();
 
@@ -44,7 +46,7 @@ function SubShopLayout() {
 
   return (
     <>
-      <code className="fixed w-1/2 bg-slate-400/50 p-2">
+      <code className="fixed hidden w-1/2 bg-slate-400/50 p-2">
         <PrintResponse data={shopInfosData} title="shopInfosData" />
 
         <pre>
@@ -53,7 +55,7 @@ function SubShopLayout() {
         </pre>
       </code>
 
-      {/* <SectionShopInfo data={shopInfosData} /> */}
+      <SectionShopInfo data={shopInfosData} />
 
       <Outlet />
     </>
