@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 
 import apiHelper from '../utils/helpers';
 import PrintResponse from '../components/DevPrintResponse';
@@ -10,36 +10,45 @@ function SubShopLayout() {
   const { shopId, itemId } = useParams();
 
   const [shopInfosData, setShopInfosData] = useState(null);
-  const [isFetch, setIsFetch] = useState(null);
+  const [menuData, setMenuData] = useState(null);
+  // const [isFetch, setIsFetch] = useState(null);
+  // const [count, setCount] = React.useState(0);
 
   useEffect(() => {
-    apiHelper.getInfoMenu(shopId).then((res) => {
-      console.log(res);
+    let isFetch = false;
 
-      if (res?.data?.Status) {
-        console.log('getInfoMenu:::', res?.data);
+    if (!shopInfosData) {
+      apiHelper.getInfoMenu(shopId).then((res) => {
+        console.log(res);
 
-        const { Message, menuList, feedback } = res.data;
-        // console.log('menuList-0:::', menuList[0]);
-        if (!isFetch) {
-          setShopInfosData({ Message, menuList, feedback });
+        if (res?.data?.Status) {
+          console.log('getInfoMenu:::', res?.data);
+
+          const { Message, menuList, feedback } = res.data;
+          // console.log('menuList-0:::', menuList[0]);
+          if (!isFetch) {
+            setShopInfosData({ Message, menuList, feedback });
+            setMenuData([...menuList]);
+          }
+          /* end of IF(!isFetch) */
         }
-      }
-      /* end of IF(!Status) */
-    });
-    // }
+        /* end of IF(!Status) */
+      });
+    }
     /* end of IF(!length) */
 
     return () => {
       setTimeout(() => {
-        setIsFetch(true);
-      }, 500);
+        // setIsFetch(true);
+        isFetch = true;
+      }, 300);
       /* end of setTimeout() */
     };
   }, [shopId]);
   /* end of useEffect() */
 
-  if (!shopInfosData || !isFetch) {
+  if (!shopInfosData) {
+    // if (!shopInfosData || !isFetch) {
     return <h2>LOADING...</h2>;
   }
   /* end of IF(!data) */
@@ -57,10 +66,16 @@ function SubShopLayout() {
 
       <SectionShopInfo data={shopInfosData} />
 
-      <Outlet />
+      <Outlet context={{ shopId, shopInfosData, menuData }} />
+      {/* <Outlet context={[count, setCount]} /> */}
     </>
   );
 }
 /* end of SubShopLayout() */
 
 export default SubShopLayout;
+
+export function useShop() {
+  return useOutletContext();
+}
+/* end of useShop-useOutletContext */
