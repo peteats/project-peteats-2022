@@ -1,26 +1,54 @@
 import React from 'react';
+// import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Skeleton from '@mui/material/Skeleton';
 
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import ImageErrorHandler from '../utils/ImageErrorHandler';
 const ICON_STAR = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/feature_LayoutOfGET/src/images/icon-star.png';
 
-const MOCK_IMAGE = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Store.png';
+const Store = 'https://raw.githubusercontent.com/Learn-At-RocketCamp/project-peteats-2022/dev/src/images/Store.png';
+
 // const FAKE_IMAGE = 'https://peteats.rocket-coding.com/Image/Shop/Shop_04few.jpg';
 
 function ShopItem({ data, queryType }) {
   const {
     Id, ShopName, imageUrl, EvaluateStars, Views, CityName,
   } = data;
+  // const { Id, ShopName } = data;
+  // const { Id, ShopName, ShopAddress } = data;
+
+  // {
+  //   Id: null,
+  //   ShopName: '',
+  //   imageUrl: '',
+  //   EvaluateStars: '',
+  //   Views: '',
+  //   CityName: '',
+  // }
+
+  /**
+   * #NOTE:
+   * - `.`: many
+   * - `+`: any
+   */
+  // const regexpCity = /.+市/;
 
   const onImageError = (e) => {
-    e.target.src = MOCK_IMAGE;
+    e.target.src = Store;
   };
-  /* end of onImageError(e) */
+
+  // if (!data) {
+  //   return (
+  //     <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+  //   );
+  // }
 
   return (
-    <li className="ShopItem col-span-12 sm:col-span-4 md:col-span-4 lg:col-span-3">
+    <li className="col-span-12 sm:col-span-4 md:col-span-4 lg:col-span-3">
+      {/* <li className="w-full pl-6 pb-6 md:max-w-[267px]"> */}
       {/* /shops/:shopId */}
       <Link
         to={`/shops/${Id}`}
@@ -28,29 +56,56 @@ function ShopItem({ data, queryType }) {
       >
         <div className="mx-auto flex max-w-[267px] flex-col justify-between">
           <picture className="relative pt-[100%]">
+            {/* <picture className="block max-w-[267px] rounded-2xl"> */}
             <img
               loading="lazy"
-              src={imageUrl}
+              src={imageUrl || Store}
+              // src={FAKE_IMAGE}
               onError={onImageError}
+              // onError={ImageErrorHandler}
+              // src={imageUrl || Store}
               // src={cover ? cover : placeholderImage}
               alt={ShopName || 'ShopName'}
+              // className="z-0 block h-full max-w-[267px] rounded-2xl object-cover"
               className="absolute left-0 top-0 z-0 h-full w-full
               rounded-2xl object-cover object-center"
             />
+
+            {/* {imageUrl ? (
+              <img
+                loading="lazy"
+                src={FAKE_IMAGE}
+                onError={onImageError}
+                alt={ShopName || 'ShopName'}
+                className="absolute left-0 top-0 z-0 h-full w-full
+              rounded-2xl object-cover object-center"
+              />
+            ) : (
+              <Skeleton
+                sx={{ height: '267px', width: '267px', borderRadius: '6px' }}
+                // className="rounded-sm"
+                animation="wave"
+                variant="rounded"
+              />
+            )} */}
           </picture>
 
           <section className="relative z-30 -mt-10 min-h-fit rounded-2xl bg-[#212529] py-4 px-6 text-white shadow-xl hover:bg-[#DB8C8C]">
             <div className="flex justify-between">
+              {/* #TODO: CityName */}
+              {/* {queryType === 'TAG' && data.ShopAddress.match(regexpCity)}
+              {queryType === 'CITY' && data.CityName} */}
+              {/* <p>{ShopAddress.match(regexpCity)}</p> */}
               <p>{CityName}</p>
 
               <FavoriteBorderIcon />
             </div>
 
             <h3 className="py-3 text-2xl font-bold">
-              {/* <code>
+              <code>
                 {Id}
                 _
-              </code> */}
+              </code>
               {ShopName}
             </h3>
 

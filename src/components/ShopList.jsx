@@ -24,55 +24,57 @@ const MOCK_DATA = {
 
 function ShopList({ queryType, queryId }) {
   const [shopsData, setShopsData] = useState(null);
-
-  useEffect(() => {
-    const { data } = MOCK_DATA;
-    setShopsData(data);
-  }, [shopsData]);
+  // const [isFetch, setIsFetch] = useState(null);
 
   // useEffect(() => {
-  //   if (queryType === 'TAG') {
-  //     apiHelper.getShopsByTag(queryId).then((res) => {
-  //       console.log(res);
+  //   const { data } = MOCK_DATA;
+  //   setShopsData(data);
+  // }, [shopsData]);
+  /* end of useEffect-MOCK_DATA */
 
-  //       if (res?.data?.Status) {
-  //         console.log('getShopsByTag:::', res?.data);
+  useEffect(() => {
+    if (queryType === 'TAG') {
+      apiHelper.getShopsByTag(queryId).then((res) => {
+        console.log(res);
 
-  //         const { data } = res.data;
-  //         console.log(data[0]);
-  //         setShopsData(data);
-  //       }
-  //     });
-  //   }
+        if (res?.data?.Status) {
+          console.log('getShopsByTag:::', res?.data);
 
-  //   if (queryType === 'CITY') {
-  //     apiHelper.getShopsByCity(queryId).then((res) => {
-  //       console.log(res);
+          const { data } = res.data;
+          console.log(data[0]);
+          setShopsData(data);
+        }
+      });
+    }
 
-  //       if (res?.data?.Status) {
-  //         console.log('getShopsByCity:::', res?.data);
+    if (queryType === 'CITY') {
+      apiHelper.getShopsByCity(queryId).then((res) => {
+        console.log(res);
 
-  //         const { Data } = res.data;
-  //         console.log(Data[0]);
-  //         setShopsData(Data);
-  //       }
-  //     });
-  //   }
+        if (res?.data?.Status) {
+          console.log('getShopsByCity:::', res?.data);
 
-  //   if (queryType === 'HOT') {
-  //     apiHelper.getShopsHot().then((res) => {
-  //       console.log(res);
+          const { Data } = res.data;
+          console.log(Data[0]);
+          setShopsData(Data);
+        }
+      });
+    }
 
-  //       if (res?.data?.Status) {
-  //         console.log('getShopsHot:::', res?.data);
+    if (queryType === 'HOT') {
+      apiHelper.getShopsHot().then((res) => {
+        console.log(res);
 
-  //         const { Message } = res.data;
-  //         console.log(Message[0]);
-  //         setShopsData(Message);
-  //       }
-  //     });
-  //   }
-  // }, [queryId]);
+        if (res?.data?.Status) {
+          console.log('getShopsHot:::', res?.data);
+
+          const { Message } = res.data;
+          console.log(Message[0]);
+          setShopsData(Message);
+        }
+      });
+    }
+  }, [queryId]);
 
   if (!shopsData) {
     return <ShopsSkeleton />;

@@ -40,44 +40,45 @@ const MOCK_DATA = {
 function CategoryList({ pageType }) {
   // #REVIEW: context.Provider?
   const [cateData, setCateData] = useState([]);
-  // const [isFetch, setIsFetch] = useState(null);
-
-  useEffect(() => {
-    const { Data } = MOCK_DATA;
-    setCateData(Data);
-  }, [cateData]);
+  const [isFetch, setIsFetch] = useState(null);
 
   // useEffect(() => {
-  //   if (!cateData.length) {
-  //     apiHelper.getShopTag().then((res) => {
-  //       console.log(res);
-
-  //       if (res?.data?.Status) {
-  //         console.log('getShopTag:::', res?.data?.Data);
-
-  //         const { Data } = res.data;
-  //         if (!isFetch) {
-  //           setCateData(Data);
-  //         }
-  //         /* end of IF(!isFetch) */
-  //       }
-  //       /* end of IF(Status) */
-  //     });
-  //     /* end of API */
-  //   }
-  //   return () => {
-  //     setTimeout(() => {
-  //       setIsFetch(true);
-  //     }, 500);
-  //     /* end of setTimeout() */
-  //   };
+  //   const { Data } = MOCK_DATA;
+  //   setCateData(Data);
   // }, [cateData]);
-  // /* end of useEffect() */
+  /* end of useEffect-MOCK_DATA */
 
-  // if (!cateData.length || !isFetch) {
-  // if (!cateData.length) {
-  //   return <CategorySkeleton pageType={pageType} />;
-  // }
+  useEffect(() => {
+    if (!cateData.length) {
+      apiHelper.getShopTag().then((res) => {
+        console.log(res);
+
+        if (res?.data?.Status) {
+          console.log('getShopTag:::', res?.data?.Data);
+
+          const { Data } = res.data;
+          if (!isFetch) {
+            setCateData(Data);
+          }
+          /* end of IF(!isFetch) */
+        }
+        /* end of IF(Status) */
+      });
+      /* end of API */
+    }
+    return () => {
+      setTimeout(() => {
+        setIsFetch(true);
+      }, 300);
+      /* end of setTimeout() */
+    };
+  }, [cateData]);
+  /* end of useEffect() */
+
+  if (!cateData.length || !isFetch) {
+    // if (!cateData.length) {
+    return <CategorySkeleton pageType={pageType} />;
+  }
   /* end of IF(!data) */
 
   return (
