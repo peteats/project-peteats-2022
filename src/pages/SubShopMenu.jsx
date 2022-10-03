@@ -2,7 +2,9 @@ import React from 'react';
 // import { useOutletContext } from 'react-router-dom';
 
 import { useShop } from './SubShopLayout';
-import PrintResponse from '../components/DevPrintResponse';
+// import PrintResponse from '../components/DevPrintResponse';
+
+import MenuItem from '../components/MenuItem';
 
 function SubShopMenu() {
   const { shopId, menuData } = useShop();
@@ -19,20 +21,20 @@ function SubShopMenu() {
       {/* <PrintResponse data={shopInfosData} title="shopInfosData" /> */}
       {/* <PrintResponse data={menuData} title="menuData" /> */}
 
-      <pre>
+      {/* <pre>
         shopId:::
         {shopId}
-      </pre>
+      </pre> */}
 
       <>
         <div className="SubShopMenu pe-container mx-auto mb-20 px-1 md:p-0">
           <ul className="flex w-full flex-col flex-wrap justify-between gap-8 md:flex-row">
-            {menuData.map((item) => (
-              <PrintResponse data={item} title="item" />
-              // console.log(item);
-              // return <li>item.Id</li>;
+            {menuData.map((item) => {
+              console.log('item:', item);
+              // <PrintResponse data={item} title="item" />;
               // <SpecItem key={item.Id} data={item} onClickItem={onClickItem} />
-            ))}
+              return <MenuItem key={item.Id} item={item} shopId={shopId} />;
+            })}
           </ul>
         </div>
         {/* end of container */}

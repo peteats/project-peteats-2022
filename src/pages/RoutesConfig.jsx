@@ -11,7 +11,7 @@ import SubShopCart from './SubShopCart';
 
 import PageNotFound from './PageNotFound';
 
-import Modal from '../components/Modal';
+// import Modal from '../draft/DraftModal';
 
 // import DevHome from '../draft/DevHome';
 import Draft2 from '../draft/Draft2';
@@ -83,6 +83,12 @@ function RoutesConfig() {
               element: <SubShopMenu />,
             },
             {
+              path: 'menu/:itemId',
+              // path: 'menu/:itemId/modal',
+              // path: '/shops/:shopId/menu/:itemId',
+              element: <SubShopMenu />,
+            },
+            {
               path: 'cart',
               element: <SubShopCart />,
             },
@@ -94,26 +100,25 @@ function RoutesConfig() {
           element: <PageShops />,
         },
 
-        {
-          path: '/page3',
-          element: <Draft3 />,
-        },
-        {
-          path: '/shops/:shopId/menu/:itemId',
-          element: <Draft3 />,
-          // location: background,
-        },
+        // {
+        //   path: '/page3',
+        //   element: <Draft3 />,
+        // },
+        // {
+        //   path: '/shops/:shopId/menu/:itemId',
+        //   element: <Draft3 />,
+        //   // location: background,
+        // },
         {
           path: '/shops/:shopId/menu/:itemId/:optionId',
           element: <Draft3 />,
           // location: background,
         },
-
-        {
-          path: '/shops/:shopId/menu/:optionId/modal',
-          element: <Modal />,
-          // location: background,
-        },
+        // {
+        //   path: '/shops/:shopId/menu/:optionId/modal',
+        //   element: <Modal />,
+        //   // location: background,
+        // },
 
         {
           path: '/draft',
