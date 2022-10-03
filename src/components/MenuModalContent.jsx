@@ -10,6 +10,95 @@ import apiHelper from '../utils/helpers';
 import useInput from '../hooks/useInput';
 import useCounter from '../hooks/useCounter';
 
+function MenuOptionList({ itemId, onClickItem }) {
+  // const { itemId } = useParams();
+  // #TODO: WIP
+  const [optionData, setOptionData] = useState(null);
+  const [itemData, setItemData] = useState(null);
+
+  useEffect(() => {
+    let isFetch = false;
+
+    apiHelper.getMenuItem(itemId).then((res) => {
+      console.log(res);
+
+      if (res?.data?.Status) {
+        console.log('getMenuItem:::', res?.data);
+
+        const { Data, DetailList } = res.data;
+        console.log(DetailList[0]);
+        console.log(Data.ProductName);
+
+        if (!isFetch) {
+          setOptionData(DetailList);
+          setItemData(Data);
+        }
+        /* end of IF(!isFetch) */
+      }
+      /* end of IF(!Status) */
+    });
+
+    return () => {
+      isFetch = true;
+    };
+  }, [itemId]);
+
+  if (!optionData || !itemData) {
+    return (
+      <h3>
+        {itemId}
+        LOADING...
+      </h3>
+    );
+  }
+
+  return (
+    <>
+      <section className="flex flex-col gap-4 pb-8">
+        <div className="flex justify-between py-2">
+          <h3 className="text-lg font-bold">{itemData.ProductName}</h3>
+
+          <p>{`${itemData.Price} 元`}</p>
+        </div>
+
+        <h4 className="text-lg font-bold">商品選項</h4>
+
+        <ul className="flex w-full flex-col justify-between gap-4">
+          {optionData.map((item) => {
+            console.log(item);
+            return (
+              <li key={item.Id}>
+                <p>
+                  <button
+                    type="button"
+                    className="block"
+                    onClick={() => {
+                      onClickItem(item.Id);
+                    }}
+                  >
+                    <span>{item.Id}</span>
+                    {item.Content}
+                  </button>
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+      {/*  */}
+    </>
+  );
+}
+/* end of MenuOptionList */
+
+MenuOptionList.propTypes = {
+  itemId: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+};
+
 function MenuModalContent({ item, shopId }) {
   const navigate = useNavigate();
 
@@ -23,6 +112,13 @@ function MenuModalContent({ item, shopId }) {
   const [clickOptionId, setClickOptionId] = useState(0);
 
   const thisMsg = useInput('');
+
+  const onClickItem = (optionItemId) => {
+    console.log('optionItemId:::', optionItemId);
+    console.log('shopId:::', shopId);
+    return setClickOptionId(optionItemId);
+  };
+  /* end of onClickItem() */
 
   return (
     <section className="flex w-full flex-col gap-6 py-2">
@@ -56,7 +152,6 @@ function MenuModalContent({ item, shopId }) {
       </picture>
 
       {/* Modal-Body */}
-
       <article className="flex flex-col gap-1">
         {ProductName ? (
           <div className="mb-2 flex items-center justify-between">
@@ -69,10 +164,12 @@ function MenuModalContent({ item, shopId }) {
         )}
 
         {Id ? (
-          <h4 className="text-xl font-bold">商品選項</h4>
+          <>
+            <h4 className="text-xl font-bold">商品選項</h4>
+            {/* // #TODO: WIP */}
+            <MenuOptionList itemId={Id} onClickItem={onClickItem} />
+          </>
         ) : (
-        // #TODO: WIP
-
           <>
             <Skeleton
               height="2rem"
