@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CloseIcon from '@mui/icons-material/Close';
 
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+
+import apiHelper from '../utils/helpers';
+
 function DevNavbar() {
   return (
     <nav className="text-xs text-gray-700 hover:text-white/50">
@@ -85,6 +89,13 @@ function Drawer() {
   //   return 'rotate-180 animate-spin delay-100';
   // }
 
+  const saveToken = ({ JwtToken }) => {
+    // console.log('AUTH_TOKEN:::', JwtToken);
+    const AUTH_TOKEN = `Bearer ${JwtToken}`;
+    // setToken(JwtToken);
+    localStorage.setItem('JWT', AUTH_TOKEN);
+  };
+
   return (
     <>
       <section
@@ -101,7 +112,8 @@ function Drawer() {
         <h5
           id="drawer-label"
           className="mb-4 inline-flex items-center text-lg font-semibold
-          text-gray-500 dark:text-gray-400"
+          text-gray-500 hover:text-gray-900
+          dark:hover:text-white/80"
         >
           <Link to="/">Draft</Link>
         </h5>
@@ -123,9 +135,13 @@ function Drawer() {
         </button>
         {/* end of Drawer-Header */}
 
-        <ul className="flex flex-col gap-4">
+        <ul className="grid grid-flow-row grid-cols-2 gap-4">
+          {/* <ul className="flex flex-col gap-4"> */}
+          <DrawerLink linkPath="shops" linkName="2_Shops" setHide={setHide} />
           <DrawerLink linkPath="page2" linkName="page2" setHide={setHide} />
+
           <DrawerLink linkPath="page3" linkName="page3" setHide={setHide} />
+
           <DrawerLink linkPath="page4" linkName="page4" setHide={setHide} />
           <DrawerLink linkPath="page5" linkName="page5" setHide={setHide} />
           <DrawerLink linkPath="page6" linkName="page6" setHide={setHide} />
@@ -135,6 +151,7 @@ function Drawer() {
           <DrawerLink linkPath="page10" linkName="page10" setHide={setHide} />
           <DrawerLink linkPath="404" linkName="404" setHide={setHide} />
           <DrawerLink linkPath="dev" linkName="dev" setHide={setHide} />
+          <DrawerLink linkPath="wip" linkName="WIP" setHide={setHide} />
         </ul>
 
         <DevNavbar />
@@ -165,6 +182,41 @@ function Drawer() {
         <span className="sr-only">Toggle Drawer</span>
       </button>
       {/* end of Btn-setting */}
+
+      <button
+        type="button"
+        className={` ${
+          isHide ? 'ml-0 duration-700 ease-out' : 'ml-40 ease-in'
+        }  
+        fixed top-[20vh] block cursor-pointer rounded-tr-md rounded-br-md
+        bg-gray-800/80 p-2 text-center shadow-sm 
+        shadow-gray-500/40 `}
+        onClick={() => {
+          // console.log('LOG-IN');
+
+          const data = {
+            Account: '',
+            Password: '',
+          };
+          apiHelper.userLogin(data).then((res) => {
+            // console.log(res);
+
+            saveToken(res?.data);
+          });
+          /* end of userLogin() */
+        }}
+      >
+        <div
+          className={` ${
+            isHide ? '' : 'duration-900 rotate-[1turn] transition-all ease-in'
+          } 
+          bg-transparent' rounded-full `}
+        >
+          <VpnKeyIcon sx={{ color: '#fff', fontSize: '24px' }} />
+        </div>
+
+        <span className="sr-only">DEV</span>
+      </button>
     </>
   );
 }

@@ -8,10 +8,9 @@ import logo from '../images/logo.svg';
 import poweredBy from '../images/powered-by-vitawind-dark.png';
 
 function fetchData() {
-  return new Promise((resolve) => {
-    console.log('START');
-    return setTimeout(resolve, 5000);
-  });
+  return new Promise((resolve) =>
+    // console.log('START');
+    setTimeout(resolve, 5000));
 }
 
 function DevPage() {
@@ -20,7 +19,7 @@ function DevPage() {
   const [isLoading, setLoading] = useState(false);
 
   const saveToken = ({ JwtToken }) => {
-    console.log('AUTH_TOKEN:::', JwtToken);
+    // console.log('AUTH_TOKEN:::', JwtToken);
     const AUTH_TOKEN = `Bearer ${JwtToken}`;
     // setToken(JwtToken);
     localStorage.setItem('JWT', AUTH_TOKEN);
@@ -51,7 +50,7 @@ function DevPage() {
           value="NEW"
           className="m-2 rounded bg-[#FA3] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
           onClick={() => {
-            console.log('NEW');
+            // console.log('NEW');
 
             const data = {
               Password: 'Bb000000',
@@ -59,7 +58,7 @@ function DevPage() {
             };
 
             apiHelper.userNewPassword(data).then((res) => {
-              console.log(res);
+              // console.log(res);
             });
           }}
         />
@@ -69,7 +68,7 @@ function DevPage() {
           type="button"
           className="m-2 rounded bg-[#4C9] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
           onClick={() => {
-            console.log('SIGN-UP');
+            // console.log('SIGN-UP');
 
             const user = {
               email: 'g1@dev',
@@ -77,11 +76,11 @@ function DevPage() {
               password: 'g1@dev',
             };
             apiHelper.userSignUp({ user }).then((res) => {
-              console.log(res);
+              // console.log(res);
               const { status } = res;
               if (status) {
                 const { headers } = res;
-                console.log('JWT::', headers?.authorization);
+                // console.log('JWT::', headers?.authorization);
               }
             });
 
@@ -109,7 +108,7 @@ function DevPage() {
           type="button"
           className="m-2 rounded bg-[#4C9] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
           onClick={() => {
-            console.log('LOG-IN');
+            // console.log('LOG-IN');
 
             // const user = {
             //   email: 'g1@dev',
@@ -134,7 +133,7 @@ function DevPage() {
               Password: 'Text1234',
             };
             apiHelper.userLogin(data).then((res) => {
-              console.log(res);
+              // console.log(res);
               // const { JwtToken } = res?.data ?? null;
               // console.log('JWT::', JwtToken);
               saveToken(res?.data);
@@ -153,7 +152,7 @@ function DevPage() {
           type="button"
           className="m-2 rounded bg-[#FA3] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
           onClick={() => {
-            console.log('EDIT');
+            // console.log('EDIT');
 
             const data = {
               Name: 'string',
@@ -182,10 +181,10 @@ function DevPage() {
 
             axios(config)
               .then((response) => {
-                console.log(JSON.stringify(response.data));
+                // console.log(JSON.stringify(response.data));
               })
               .catch((error) => {
-                console.log(error);
+                // console.log(error);
               });
 
             // apiHelper.userEdit(data).then((res) => {

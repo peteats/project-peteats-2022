@@ -24,8 +24,8 @@ function StoreList() {
     <section className="container mx-auto px-12 md:p-0">
       <h2 className="my-10 text-center text-3xl font-bold">
         精選推薦
-        <br />
-        熱門店家
+        {/* <br /> */}
+        <span className="pl-4">熱門店家</span>
       </h2>
 
       <ul className="-ml-8 -mb-8 flex flex-wrap">

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
@@ -16,45 +17,62 @@ import axiosInstance from './http';
 // # NOTE: A-1
 function responseHandler({ Status, Message }) {
   if (!Status) {
+    if (Message === '購物車是空的') {
+      // navigate('/shops');
+
+      return toast.info(Message, { theme: 'dark' });
+    }
+
     return toast.error(Message || 'Failed', { theme: 'dark' });
   }
-  return toast.success(Message || 'Request success', { theme: 'dark' });
+  if (Message === '您已登入成功' || !Message) {
+    return null;
+  }
+  return toast.success(Message || 'Success', { theme: 'dark' });
 }
 /* end of responseHandler() */
 
 function AxiosInterceptors({ children }) {
-  console.log('AxiosInterceptors');
+  // console.log('AxiosInterceptors');
   // const [isLoading, setLoading] = useState(false);
   const { isLoading, setLoading } = LoadingContext.useLoading();
 
   useEffect(() => {
-    console.log('AxiosInterceptors-useEffect');
+    // console.log('AxiosInterceptors-useEffect');
 
     // Add a request interceptor
     axiosInstance.interceptors.request.use(
       (config) => {
         // Do something before request is sent
-        console.log('http-req:::', config);
+        // console.log('http-req:::', config);
 
         setLoading(true);
 
+        // #TODO: createContext()
+        const token = localStorage.getItem('JWT');
+        if (token) {
+          const { headers } = config;
+          headers.Authorization = token;
+
+          // console.log('axios-config:::', config);
+        }
+
         return config;
       },
-      (error) => {
-        // Do something with request error
-        console.log(error);
+      (error) =>
+      // Do something with request error
+      // console.log(error);
 
-        return Promise.reject(error);
-      },
+        Promise.reject(error),
     );
 
     // # NOTE: A-1
     const resInterceptor = (response) => {
-      console.log(`resInterceptor-
-        [${response.status}] response from
-        [${response.request?.responseURL}]
-        ( at ${new Date()} ).
-      `);
+      // console.log(`resInterceptor-
+      //   [${response.status}] response from
+      //   [${response.request?.responseURL}]
+      //   ( at ${new Date()} ).
+      // `);
 
       const { data } = response;
       responseHandler(data);
@@ -65,37 +83,42 @@ function AxiosInterceptors({ children }) {
     };
 
     const errInterceptor = (error) => {
-      console.log('errInterceptor-');
+      // console.log('errInterceptor-');
       // status codes falls outside 2xx
       if (error.response && error.response.status === 401) {
-        console.log('redirect logic here-');
+        // console.log('redirect logic here-');
       }
 
-      if (error.response && error.response.data) {
-        toast.error(`ERROR::: ${error.response.data.message}`);
-        // return;
+      if (error.response && error.response.status === 404) {
+        // console.log('redirect logic here-');
+        return;
       }
+
+      // if (error.response && error.response.data) {
+      //   toast.error(`ERROR::: ${error.response.data.message}`);
+      //   // return;
+      // }
 
       if (error.response) {
         // #NOTE: CORS: error.response.data === undefined
-        console.log(error.response.data);
-        // error.response.status === 0
-        console.log(error.response.status);
-        // error.response.data === headers
-        console.log(error.response.headers);
+        // console.log(error.response.data);
+        // // error.response.status === 0
+        // console.log(error.response.status);
+        // // error.response.data === headers
+        // console.log(error.response.headers);
       } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
         // http.ClientRequest in node.js
-        console.log('error.request:::', error.request);
+        // console.log('error.request:::', error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        console.log('Error:::', error.message);
+        // console.log('Error:::', error.message);
       }
-      console.log('error.config:::', error.config);
+      // console.log('error.config:::', error.config);
 
       setTimeout(() => {
-        console.log('setLoading');
+        // console.log('setLoading');
         setLoading(false);
       }, 5000);
 
@@ -109,7 +132,7 @@ function AxiosInterceptors({ children }) {
       errInterceptor,
     );
     // console.log(axiosInstance.interceptors.response.eject(interceptor));
-    console.log('interceptor::', interceptor);
+    // console.log('interceptor::', interceptor);
 
     return () => axiosInstance.interceptors.response.eject(interceptor);
 
