@@ -1,20 +1,25 @@
+import axios from 'axios';
 import baseReq from './http';
 // import baseReq from './AxiosInterceptors';
 // import { baseReq } from './AxiosInterceptors';
+import MOCK_DATA from '../draft/mock.json';
+
+// console.log(MOCK_DATA);
 
 const userSignUp = async (data) => {
   // console.log(typeof baseReq);
-  console.log(data);
-  const response = await baseReq.post('/users/sign-up', data).catch((error) => {
-    console.log(error);
-    return error.response;
-  });
+  // console.log(data);
+  const response = await baseReq.post('/users/sign-up', data).catch(
+    (error) =>
+      // console.log(error);
+      error.response,
+  );
 
   return response;
 };
 
 const userLogin = async (data) => {
-  console.log(data);
+  // console.log(data);
 
   const response = await baseReq
     .post('/users/login', data)
@@ -24,7 +29,7 @@ const userLogin = async (data) => {
 };
 
 const userEdit = async (data) => {
-  console.log(data);
+  // console.log(data);
 
   const response = await baseReq
     .put('/users/edit', data)
@@ -40,7 +45,7 @@ const userGetInfo = async () => {
 };
 
 const userAuthMail = async (query) => {
-  console.log(query);
+  // console.log(query);
   const response = await baseReq
     .post(`/users/auth-mail?guid=${query}`)
     .catch((error) => error);
@@ -56,7 +61,7 @@ const userAuthMail = async (query) => {
 // };
 
 const userForgetPassword = async (data) => {
-  console.log(data);
+  // console.log(data);
   const response = await baseReq
     .put('/users/forget-password-mail', data)
     .catch((error) => error);
@@ -65,7 +70,7 @@ const userForgetPassword = async (data) => {
 };
 
 const userResetPassword = async (data) => {
-  console.log(data);
+  // console.log(data);
   const response = await baseReq
     .post('/users/mail-reset-password', data)
     .catch((error) => error);
@@ -74,7 +79,7 @@ const userResetPassword = async (data) => {
 };
 
 const userNewPassword = async (data) => {
-  console.log(data);
+  // console.log(data);
 
   const response = await baseReq
     .post('/users/login-reset-password', data)
@@ -90,6 +95,23 @@ const userCheck = async () => {
 };
 /* end of API-users */
 
+const userLogout = async () => {
+  const response = await baseReq
+    .delete('/users/logout')
+    .catch((error) => error);
+
+  return response;
+};
+/* end of API-users */
+
+const getImg = async (src) => {
+  // console.log(query);
+
+  const response = await axios.get(src).catch((error) => error);
+
+  return response;
+};
+
 // 2-1
 const getShopTag = async () => {
   const response = await baseReq.get('/home/shop').catch((error) => error);
@@ -103,14 +125,28 @@ const getShopCity = async () => {
   return response;
 };
 
-const getShopHot = async () => {
-  const response = await baseReq.get('/home/hot').catch((error) => error);
+const getShops = async ({ queryType, queryId }) => {
+  // console.log(queryId);
+
+  const URI_SHOPS = () => {
+    if (queryType === 'TAG') {
+      return `/shop/tag?ProductClassId=${queryId}`;
+    }
+    if (queryType === 'CITY') {
+      return `/shop/local/city?Id=${queryId}`;
+    }
+    return '/home/hot';
+  };
+
+  const response = await baseReq
+    .get(`${URI_SHOPS(queryType)}`)
+    .catch((error) => error);
 
   return response;
 };
 
 const getShopsByTag = async (query) => {
-  console.log(query);
+  // console.log(query);
 
   const response = await baseReq
     // .get('/shop/tag?ProductClassId=1')
@@ -120,17 +156,27 @@ const getShopsByTag = async (query) => {
   return response;
 };
 
-const getShopsByCity = async () => {
+const getShopsByCity = async (query) => {
+  // console.log(query);
+  // =${query}
   const response = await baseReq
-    .get('/shop/local/city?Id=1')
+    .get(`/shop/local/city?Id=${query}`)
     .catch((error) => error);
 
   return response;
 };
 
+const getShopsHot = async () => {
+  const response = await baseReq.get('/home/hot').catch((error) => error);
+
+  return response;
+};
+
 const getInfoMenu = async (query) => {
-  console.log(query);
+  // console.log(query);
   // =${query}
+
+  // #TODO: promise with putShopHit
 
   const response = await baseReq
     .get(`/shop/shop-id/menu?ShopId=${query}`)
@@ -139,8 +185,19 @@ const getInfoMenu = async (query) => {
   return response;
 };
 
+const putShopHit = async (query) => {
+  // console.log(query);
+  // =${query}
+  // /shop/views?ShopId=3
+  const response = await baseReq
+    .put(`/shop/views?ShopId=${query}`)
+    .catch((error) => error);
+
+  return response;
+};
+
 const getMenuItem = async (query) => {
-  console.log(query);
+  // console.log(query);
   // =${query}
 
   const response = await baseReq
@@ -194,7 +251,7 @@ const editCart = async ({
 };
 
 const deleteCart = async (query) => {
-  console.log(query);
+  // console.log(query);
   // =${query}
 
   const response = await baseReq
@@ -229,17 +286,28 @@ const getHistoryOrders = async () => {
 const getOrderDetail = async (query) => {
   const response = await baseReq
     // oder/detail?OrderInformationId=41
-    .get(`/oder/detail?OrderInformationId=${query}`)
+    // .get(`/oder/detail?OrderInformationId=${query}`)
+    .get(`/order/detail?OrderInformationId=${query}`)
     .catch((error) => error);
 
   return response;
 };
 
 const orderPay = async (query) => {
-  console.log(query);
+  // console.log(query);
 
   const response = await baseReq
     .post(`/order/pay?Id=${query}`)
+    .catch((error) => error);
+
+  return response;
+};
+
+const getOrderStatus = async (query) => {
+  // console.log(query);
+
+  const response = await baseReq
+    .get(`/order/pay-result?Id=${query}`)
     .catch((error) => error);
 
   return response;
@@ -265,14 +333,20 @@ const apiHelper = {
   userForgetPassword,
   userResetPassword,
   userCheck,
+  userLogout,
 
+  getImg,
   getShopTag,
   getShopCity,
+
+  getShops,
   getShopsByTag,
   getShopsByCity,
-  getShopHot,
+  getShopsHot,
+
   getInfoMenu,
   getMenuItem,
+  putShopHit,
 
   getCart,
   addItemToCart,
@@ -281,6 +355,7 @@ const apiHelper = {
   checkoutCart,
 
   orderPay,
+  getOrderStatus,
   getHistoryOrders,
   getOrderDetail,
   reviewOrder,

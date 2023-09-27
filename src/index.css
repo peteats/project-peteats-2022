@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 * {
-  outline: .5px solid #f73;
+  /* outline: .5px solid #f73; */
+}
+
+html,body {
+  overflow-x: hidden;
 }
 
 @layer components {

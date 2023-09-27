@@ -6,9 +6,73 @@ import { useNavigate } from 'react-router-dom';
 
 import Skeleton from '@mui/material/Skeleton';
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
 import apiHelper from '../utils/helpers';
 import useInput from '../hooks/useInput';
 import useCounter from '../hooks/useCounter';
+
+function ControlledRadioButtonsGroup({ optionData, onClickItem }) {
+  const [value, setValue] = React.useState(null);
+  // const [value, setValue] = React.useState(optionData[0].Id);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <FormControl>
+      <FormLabel id="demo-controlled-radio-buttons-group">
+        {/* <h3 className="text-lg font-bold">付款方式</h3> */}
+      </FormLabel>
+
+      <div className="pl-2">
+        <RadioGroup
+          aria-labelledby="demo-controlled-radio-buttons-group"
+          name="controlled-radio-buttons-group"
+          value={value}
+          onChange={handleChange}
+        >
+          {optionData.map((item) => (
+            // console.log();
+            // console.log(item);
+
+            <li key={item.Id}>
+              <button
+                type="button"
+                className="block"
+                onClick={() => {
+                  onClickItem(item.Id);
+                }}
+              >
+                <FormControlLabel
+                  control={<Radio />}
+                  label={item.Content}
+                  value={item.Id}
+                />
+                {/* <span>{item.Id}</span>
+                  {item.Content} */}
+              </button>
+            </li>
+          ))}
+        </RadioGroup>
+      </div>
+    </FormControl>
+  );
+}
 
 function MenuOptionList({ itemId, onClickItem }) {
   // const { itemId } = useParams();
@@ -20,14 +84,14 @@ function MenuOptionList({ itemId, onClickItem }) {
     let isFetch = false;
 
     apiHelper.getMenuItem(itemId).then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res?.data?.Status) {
-        console.log('getMenuItem:::', res?.data);
+        // console.log('getMenuItem:::', res?.data);
 
         const { Data, DetailList } = res.data;
-        console.log(DetailList[0]);
-        console.log(Data.ProductName);
+        // console.log(DetailList[0]);
+        // console.log(Data.ProductName);
 
         if (!isFetch) {
           setOptionData(DetailList);
@@ -54,35 +118,16 @@ function MenuOptionList({ itemId, onClickItem }) {
 
   return (
     <>
+      {itemData?.ProductContent}
+
       <section className="flex flex-col gap-4 pb-8">
-        <div className="flex justify-between py-2">
-          <h3 className="text-lg font-bold">{itemData.ProductName}</h3>
-
-          <p>{`${itemData.Price} 元`}</p>
-        </div>
-
-        <h4 className="text-lg font-bold">商品選項</h4>
+        <h4 className="mt-4 text-xl font-bold">商品選項</h4>
 
         <ul className="flex w-full flex-col justify-between gap-4">
-          {optionData.map((item) => {
-            console.log(item);
-            return (
-              <li key={item.Id}>
-                <p>
-                  <button
-                    type="button"
-                    className="block"
-                    onClick={() => {
-                      onClickItem(item.Id);
-                    }}
-                  >
-                    <span>{item.Id}</span>
-                    {item.Content}
-                  </button>
-                </p>
-              </li>
-            );
-          })}
+          <ControlledRadioButtonsGroup
+            optionData={optionData}
+            onClickItem={onClickItem}
+          />
         </ul>
       </section>
       {/*  */}
@@ -103,7 +148,7 @@ function MenuModalContent({ item, shopId }) {
   const navigate = useNavigate();
 
   const {
-    Id, Price, ProductName, imageUrl,
+    Id, Price, ProductName, imageUrl, ProductContent,
   } = item;
 
   // const [state, dispatch] = useReducer(counterReducer, { count: 1 });
@@ -113,16 +158,15 @@ function MenuModalContent({ item, shopId }) {
 
   const thisMsg = useInput('');
 
-  const onClickItem = (optionItemId) => {
-    console.log('optionItemId:::', optionItemId);
-    console.log('shopId:::', shopId);
-    return setClickOptionId(optionItemId);
-  };
+  const onClickItem = (optionItemId) =>
+    // console.log('optionItemId:::', optionItemId);
+    // console.log('shopId:::', shopId);
+    setClickOptionId(optionItemId);
   /* end of onClickItem() */
 
   return (
     <section className="flex w-full flex-col gap-6 py-2">
-      <pre className="fixed top-4 flex gap-4">
+      <pre className="fixed top-4 flex hidden gap-4">
         shopId:::
         {shopId}
         <code>
@@ -138,6 +182,7 @@ function MenuModalContent({ item, shopId }) {
             src={imageUrl}
             alt={ProductName}
             className="h-full w-full rounded-2xl object-cover object-center"
+            // #FIXME:
           />
         ) : (
           <Skeleton
@@ -158,6 +203,7 @@ function MenuModalContent({ item, shopId }) {
             <h4 className="text-2xl font-bold">{ProductName}</h4>
 
             <p>{`${Price} 元`}</p>
+            {/* <p>{ProductContent}</p> */}
           </div>
         ) : (
           <Skeleton variant="text" sx={{ fontSize: '2.5rem' }} />
@@ -165,7 +211,7 @@ function MenuModalContent({ item, shopId }) {
 
         {Id ? (
           <>
-            <h4 className="text-xl font-bold">商品選項</h4>
+            {/* <h4 className="text-xl font-bold">商品選項</h4> */}
             {/* // #TODO: WIP */}
             <MenuOptionList itemId={Id} onClickItem={onClickItem} />
           </>
@@ -230,10 +276,11 @@ function MenuModalContent({ item, shopId }) {
                   dispatch({ type: 'minus' });
                 }}
               >
-                -
+                {/* - */}
+                <RemoveIcon />
               </button>
 
-              <p>{state.count}</p>
+              <p className="text-2xl font-bold text-[#DB8C8C]">{state.count}</p>
 
               <button
                 type="button"
@@ -241,7 +288,8 @@ function MenuModalContent({ item, shopId }) {
                   dispatch({ type: 'plus' });
                 }}
               >
-                +
+                {/* + */}
+                <AddIcon />
               </button>
             </div>
 
@@ -252,7 +300,7 @@ function MenuModalContent({ item, shopId }) {
                 !clickOptionId
                   ? 'cursor-not-allowed bg-gray-400'
                   : 'bg-[#333] hover:bg-[#DB8C8C]'
-              }  m-2 block w-4/5 rounded  px-4 py-1 text-center text-white `}
+              }  m-2 block w-4/5 rounded  px-4 py-2 text-center text-white `}
               // onClick={closeToast}
               onClick={() => {
                 // const optionId = 8;
@@ -262,10 +310,10 @@ function MenuModalContent({ item, shopId }) {
                 return apiHelper
                   .addItemToCart({ clickOptionId, msg, amount })
                   .then((res) => {
-                    console.log(res);
+                    // console.log(res);
 
                     if (res?.data?.Status) {
-                      console.log('addItemToCart:::', res?.data);
+                      // console.log('addItemToCart:::', res?.data);
 
                       // #TODO: Toast-ID
                       // closeToast();
@@ -281,7 +329,7 @@ function MenuModalContent({ item, shopId }) {
                   });
               }}
             >
-              CART
+              加入購物車
             </button>
           </div>
         ) : (

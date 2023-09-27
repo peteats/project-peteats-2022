@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from 'react';
 
-import apiHelper from '../utils/helpers';
+import { Link } from 'react-router-dom';
 
-const IMAGE = 'https://fakeimg.pl/400x300/';
+// import L from 'leaflet';
+
+import apiHelper from '../utils/helpers';
 // const IMAGE = 'https://picsum.photos/seed/picsum/200/300';
 
-function HistoryOrderItem({ item }) {
+const IMAGE = 'https://fakeimg.pl/400x300/';
+
+function HistoryOrderItem({ item, fakeId }) {
   const {
-    OrderInformationId, ShopName, OrderStatusName, ProductName,
+    OrderInformationId,
+    ShopName,
+    OrderStatusName,
+    ProductName,
+    imageUrl,
+    CreatDate,
+    PaymentName,
   } = item;
+
+  const [orderState, setOrderState] = useState(null);
 
   return (
     <>
+      {/* <div id="map" /> */}
       <li className="flex flex-col gap-6  md:grid md:grid-flow-row md:grid-cols-12">
         <div className="md:col-span-4">
           <picture className="relative block w-full pt-[70%]">
             <img
-              src={IMAGE}
+              src={imageUrl || IMAGE}
               alt={ShopName}
               className="absolute left-0 top-0 h-full w-full rounded-2xl object-cover object-center"
             />
@@ -25,7 +38,7 @@ function HistoryOrderItem({ item }) {
 
         <section className="font-bold  md:col-span-5">
           <h3 className="mb-4 text-center  md:text-left">
-            <code>{OrderInformationId}</code>
+            {/* <code>{OrderInformationId}</code> */}
             {ShopName}
           </h3>
 
@@ -33,45 +46,90 @@ function HistoryOrderItem({ item }) {
             <li>
               <p className="flex items-center gap-4">
                 訂單編號
-                <span className="">{OrderStatusName}</span>
+                <span className="">
+                  {fakeId.length < 5 ? fakeId : fakeId.substring(0, 5)}
+                </span>
+                {/* <span className="">{fakeId}</span> */}
+                {/* <span className="">{OrderInformationId}</span> */}
               </p>
             </li>
 
             <li>
               <p className="flex items-center gap-4">
                 訂單狀態
-                <span>{ProductName}</span>
+                {/* <span>{OrderStatusName}</span> */}
+                <button
+                  type="button"
+                  className="block py-2 text-[#DB8C8C] transition delay-150 duration-300
+                  ease-in-out hover:-translate-y-1
+                  hover:scale-105
+                  focus:outline-none"
+                  onClick={() => {
+                    apiHelper.getOrderStatus(OrderInformationId).then((res) => {
+                      // console.log('API-getOrderStatus:::', res);
+
+                      if (res?.data?.Status) {
+                        // console.log('getHistoryOrders:::', res?.data);
+
+                        const { data } = res.data;
+                        const { OrderStatusName: nowOrderStatus } = data[0];
+                        // console.log('OrderStatusName', nowOrderStatus);
+                        setOrderState(nowOrderStatus);
+                      }
+                      /* end of IF(Status) */
+                    });
+                  }}
+                >
+                  {/* CHECK */}
+                  {/* {orderState && orderState} */}
+                  {orderState || OrderStatusName}
+                </button>
               </p>
             </li>
             <li>
               <p className="flex items-center gap-4">
                 訂單時間
-                <span>STRING</span>
+                <span>{CreatDate.split('T')[0]}</span>
+                <span>{CreatDate.split('T')[1].substring(0, 8)}</span>
+                {/* <span>{CreatDate}</span> */}
               </p>
             </li>
             <li>
               <p className="flex items-center gap-4">
                 付款方式
-                <span>STRING</span>
+                <span>{PaymentName}</span>
               </p>
             </li>
           </ul>
         </section>
 
         <div className="flex flex-col items-end justify-center gap-7  md:col-span-3">
-          <button
+          {/* <button
             type="button"
             className="block w-full rounded-sm border py-2 text-black md:w-2/3"
           >
             查看詳細訂單
-          </button>
+          </button> */}
 
-          <button
-            type="button"
-            className="block w-full rounded-sm border py-2 text-black md:w-2/3"
+          <Link
+            to={`/me/orders/${OrderInformationId}`}
+            className="block w-full rounded-sm border py-2 text-center text-[#343A40]"
           >
+            {/* /orders/:id */}
+            查看詳細訂單
+          </Link>
+
+          <Link
+            to={`/me/orders/${OrderInformationId}/review`}
+            className="hover:scale-103 block w-full rounded bg-[#343A40]
+            py-2.5 text-center font-normal text-white transition delay-150
+            duration-300 ease-in-out
+            hover:-translate-y-1 hover:bg-[#DB8C8C]
+            focus:outline-none active:bg-[#DB8C8C]/80"
+          >
+            {/* '/me/orders/:orderId/review', */}
             給予訂單評價
-          </button>
+          </Link>
         </div>
       </li>
       {/* end of Grid */}
@@ -85,23 +143,26 @@ function PageHistoryOrder() {
   // getHistoryOrder
 
   useEffect(() => {
-    apiHelper.getHistoryOrder().then((res) => {
-      console.log(res);
+    apiHelper.getHistoryOrders().then((res) => {
+      // console.log(res);
 
       if (res?.data?.Status) {
-        console.log('getHistoryOrder:::', res?.data);
+        // console.log('getHistoryOrders:::', res?.data);
 
         const { Message } = res.data;
         // console.log(DetailList[0]);
         // console.log(Data[0]);
         setHistoryOrders(Message);
+        // const tmp = { ...Message };
+        // const tmpReverse = tmp.reverse();
+        // setHistoryOrders(tmpReverse);
       }
     });
   }, []);
 
   return (
     <>
-      <div className="container mx-auto  px-1 pt-40 pb-20  md:pt-20">
+      <div className="pe-container mx-auto my-20 ">
         <div className="items-center  md:grid md:grid-flow-row md:grid-cols-12">
           <div className="pb-6  md:col-span-8 md:pb-2">
             <h2 className="text-center text-2xl font-bold  md:text-left">
@@ -110,13 +171,12 @@ function PageHistoryOrder() {
 
             <button
               type="button"
-              className="m-2 rounded bg-[#6AF] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
-              onClick={() => apiHelper.getHistoryOrder().then((res) => {
-                console.log(res);
+              className="m-2 hidden rounded bg-[#6AF] py-2 px-3 text-center text-xs font-bold text-white transition-all hover:bg-gray-200"
+              onClick={() => apiHelper.getHistoryOrders().then((res) => {
+                // console.log(res);
 
                 if (res?.data?.Status) {
-                  console.log('getHistoryOrder:::', res?.data);
-
+                  // console.log('getHistoryOrders:::', res?.data);
                   // const { Data, DetailList } = res.data;
                   // console.log(DetailList[0]);
                   // console.log(Data[0]);
@@ -131,7 +191,7 @@ function PageHistoryOrder() {
           <div className="md:col-span-4">
             <button
               type="button"
-              className="block w-full rounded-sm border py-2 text-black"
+              className="block hidden w-full rounded-sm border py-2 text-black"
             >
               CLICK
             </button>
@@ -139,10 +199,13 @@ function PageHistoryOrder() {
         </div>
 
         <ul className="flex flex-col gap-20 pt-20  md:gap-10 md:pt-10">
-          {historyOrders.map((item) => {
-            console.log('item-');
+          {historyOrders.map((item, i) => {
+            // console.log('item-');
+            const fakeId = `0${i}0${item.OrderInformationId}`;
+
             return (
-              <HistoryOrderItem key={item.OrderInformationId} item={item} />
+              <HistoryOrderItem key={fakeId} item={item} fakeId={fakeId} />
+              // <HistoryOrderItem key={item.OrderInformationId} item={item} />
             );
           })}
           {/* <HistoryOrderItem /> */}

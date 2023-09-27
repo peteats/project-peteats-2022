@@ -1,0 +1,25 @@
+{
+  "Status": true,
+  "Data": [
+    {
+      "Id": 1,
+      "ProductClassName": "生食",
+      "imageUrl": "https://peteats.rocket-coding.com/Image/Class/ProductClasses_01.png"
+    },
+    {
+      "Id": 2,
+      "ProductClassName": "鮮食",
+      "imageUrl": "https://peteats.rocket-coding.com/Image/Class/ProductClasses_02.png"
+    },
+    {
+      "Id": 3,
+      "ProductClassName": "飼料",
+      "imageUrl": "https://peteats.rocket-coding.com/Image/Class/ProductClasses_03.png"
+    },
+    {
+      "Id": 4,
+      "ProductClassName": "罐頭",
+      "imageUrl": "https://peteats.rocket-coding.com/Image/Class/ProductClasses_04.png"
+    }
+  ]
+}

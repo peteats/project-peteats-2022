@@ -51,10 +51,10 @@ function CategoryList({ pageType }) {
   useEffect(() => {
     if (!cateData.length) {
       apiHelper.getShopTag().then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopTag:::', res?.data?.Data);
+          // console.log('getShopTag:::', res?.data?.Data);
 
           const { Data } = res.data;
           if (!isFetch) {

@@ -1,25 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link, useNavigate } from 'react-router-dom';
-// import {
-//   useParams, Link, useLocation, useNavigate,
-// } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import CustomModal from './CustomModal';
 import MenuModalContent from './MenuModalContent';
 
 function MenuItem({ item, shopId }) {
-  const navigate = useNavigate();
-
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
 
   const {
     Id, Price, ProductName, imageUrl,
   } = item;
 
   const handleItemId = () => {
-    console.log('handleItemId:', Id);
+    // console.log('handleItemId:', Id);
     // console.log('shopId::', shopId);
 
     setOpen(true);
@@ -54,6 +49,9 @@ function MenuItem({ item, shopId }) {
               </code> */}
               {ProductName}
             </h4>
+
+            {/* <p>{ProductContent}</p> */}
+            {/* <p>{console.log('ProductContent', ProductContent)}</p> */}
 
             {/* md:invisible  */}
             <button

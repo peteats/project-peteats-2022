@@ -12,10 +12,10 @@ function AreaList({ size }) {
   useEffect(() => {
     if (!areaData) {
       apiHelper.getShopCity().then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopCity:::', res?.data);
+          // console.log('getShopCity:::', res?.data);
 
           const { Message } = res.data;
           // console.log(Message[0]);

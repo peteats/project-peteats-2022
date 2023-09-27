@@ -85,14 +85,14 @@ function MenuOptionList({ itemId, onClickItem }) {
     let isFetch = false;
 
     apiHelper.getMenuItem(itemId).then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res?.data?.Status) {
-        console.log('getMenuItem:::', res?.data);
+        // console.log('getMenuItem:::', res?.data);
 
         const { Data, DetailList } = res.data;
-        console.log(DetailList[0]);
-        console.log(Data.ProductName);
+        // console.log(DetailList[0]);
+        // console.log(Data.ProductName);
 
         if (!isFetch) {
           setOptionData(DetailList);
@@ -129,25 +129,23 @@ function MenuOptionList({ itemId, onClickItem }) {
         <h4 className="text-lg font-bold">商品選項</h4>
 
         <ul className="flex w-full flex-col justify-between gap-4">
-          {optionData.map((item) => {
-            console.log(item);
-            return (
-              <li key={item.Id}>
-                <p>
-                  <button
-                    type="button"
-                    className="block"
-                    onClick={() => {
-                      onClickItem(item.Id);
-                    }}
-                  >
-                    <span>{item.Id}</span>
-                    {item.Content}
-                  </button>
-                </p>
-              </li>
-            );
-          })}
+          {optionData.map((item) => (
+            // console.log(item);
+            <li key={item.Id}>
+              <p>
+                <button
+                  type="button"
+                  className="block"
+                  onClick={() => {
+                    onClickItem(item.Id);
+                  }}
+                >
+                  <span>{item.Id}</span>
+                  {item.Content}
+                </button>
+              </p>
+            </li>
+          ))}
         </ul>
       </section>
       {/*  */}
@@ -189,11 +187,10 @@ function Msg({
   const [clickOptionId, setClickOptionId] = useState(0);
   const thisMsg = useInput('');
 
-  const onClickItem = (optionItemId) => {
-    console.log('optionItemId:::', optionItemId);
-    console.log('shopId:::', shopId);
-    return setClickOptionId(optionItemId);
-  };
+  const onClickItem = (optionItemId) =>
+    // console.log('optionItemId:::', optionItemId);
+    // console.log('shopId:::', shopId);
+    setClickOptionId(optionItemId);
   /* end of onClickItem() */
 
   return (
@@ -261,10 +258,10 @@ function Msg({
             return apiHelper
               .addItemToCart({ clickOptionId, msg, amount })
               .then((res) => {
-                console.log(res);
+                // console.log(res);
 
                 if (res?.data?.Status) {
-                  console.log('addItemToCart:::', res?.data);
+                  // console.log('addItemToCart:::', res?.data);
 
                   // #TODO: Toast-ID
                   closeToast();
@@ -289,8 +286,8 @@ function Msg({
 
 function toastModal({ itemId, shopId }) {
   // const { itemId } = useParams();
-  console.log('toastModal:', itemId);
-  console.log('shopId::', shopId);
+  // console.log('toastModal:', itemId);
+  // console.log('shopId::', shopId);
 
   const toastConfig = {
     position: 'top-center',
@@ -331,8 +328,8 @@ function SpecItem({ data, onClickItem }) {
   } = data;
 
   const handleItemId = () => {
-    console.log('handleItemId:', Id);
-    console.log('shopId::', shopId);
+    // console.log('handleItemId:', Id);
+    // console.log('shopId::', shopId);
 
     setOpen(true);
     return onClickItem({ itemId: Id, shopId });
@@ -512,9 +509,8 @@ function SectionMenu({ data }) {
   const { shopId } = useParams();
 
   const onClickItem = ({ itemId, shopId }) => {
-    console.log('onClickItem-itemId:', itemId);
-    console.log('shopId::', shopId);
-
+    // console.log('onClickItem-itemId:', itemId);
+    // console.log('shopId::', shopId);
     // return setOpen(true);
     // return toastModal({ itemId, shopId });
   };
@@ -558,7 +554,7 @@ SectionMenu.propTypes = {
 function ShopInfoItem({ title, info }) {
   // function ShopInfoItem({ data }) {
   //   const { title, info } = data;
-  console.log(title);
+  // console.log(title);
 
   // const {
   //   ShopName,
@@ -865,13 +861,13 @@ function Draft3() {
     // setShopInfosData({ Message, menuList, feedback });
 
     apiHelper.getInfoMenu(shopId).then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res?.data?.Status) {
-        console.log('getInfoMenu:::', res?.data);
+        // console.log('getInfoMenu:::', res?.data);
 
         const { Message, menuList, feedback } = res.data;
-        console.log('menuList-0:::', menuList[0]);
+        // console.log('menuList-0:::', menuList[0]);
 
         if (!isFetch) {
           setShopInfosData({ Message, menuList, feedback });

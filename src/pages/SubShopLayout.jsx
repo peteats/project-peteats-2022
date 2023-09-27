@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useOutletContext, useParams } from 'react-router-dom';
+import {
+  Outlet,
+  useOutletContext,
+  useParams,
+  useNavigate,
+} from 'react-router-dom';
 
 import apiHelper from '../utils/helpers';
 import PrintResponse from '../components/DevPrintResponse';
@@ -8,9 +13,11 @@ import SectionShopInfo from '../components/SectionShopInfo';
 
 function SubShopLayout() {
   const { shopId, itemId } = useParams();
+  const navigate = useNavigate();
 
   const [shopInfosData, setShopInfosData] = useState(null);
   const [menuData, setMenuData] = useState(null);
+  const [feedbackData, setFeedback] = useState(null);
   // const [isFetch, setIsFetch] = useState(null);
   // const [count, setCount] = React.useState(0);
 
@@ -19,18 +26,26 @@ function SubShopLayout() {
 
     if (!shopInfosData) {
       apiHelper.getInfoMenu(shopId).then((res) => {
-        console.log(res);
+        // console.log('getInfoMenu', res);
 
         if (res?.data?.Status) {
-          console.log('getInfoMenu:::', res?.data);
+          // console.log('getInfoMenu:::', res?.data);
 
+          // const hasData = res?.data?.menuList[0] || null;
+          // console.log('hasData ', hasData);
+
+          // if (hasData) {
           const { Message, menuList, feedback } = res.data;
           // console.log('menuList-0:::', menuList[0]);
           if (!isFetch) {
             setShopInfosData({ Message, menuList, feedback });
             setMenuData([...menuList]);
+            setFeedback(feedback);
+            // }
+            /* end of IF(!isFetch) */
           }
-          /* end of IF(!isFetch) */
+
+          // navigate(-1);
         }
         /* end of IF(!Status) */
       });
@@ -64,9 +79,16 @@ function SubShopLayout() {
         </pre>
       </code>
 
-      <SectionShopInfo data={shopInfosData} />
+      {shopInfosData && <SectionShopInfo data={shopInfosData} />}
 
-      <Outlet context={{ shopId, shopInfosData, menuData }} />
+      <Outlet
+        context={{
+          shopId,
+          shopInfosData,
+          menuData,
+          feedbackData,
+        }}
+      />
       {/* <Outlet context={[count, setCount]} /> */}
     </>
   );

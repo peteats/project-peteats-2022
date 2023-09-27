@@ -32,15 +32,14 @@ function ShopList({ queryId }) {
       setQueryType('TAG');
     }
 
-    console.log(isCityRoute);
+    // console.log(isCityRoute);
 
     apiHelper.getShops({ queryType, queryId }).then((res) => {
-      console.log(res);
-      console.log('queryType', queryType);
+      // console.log(res);
+      // console.log('queryType', queryType);
 
       if (res?.data?.Status) {
-        console.log('getShops:::', res?.data);
-
+        // console.log('getShops:::', res?.data);
         // const { data } = res.data;
         // console.log(data[0]);
         // setShopsData(data);

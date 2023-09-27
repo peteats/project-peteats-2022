@@ -11,6 +11,12 @@ function AreaItem({ item, pageType }) {
   // #REVIEW: something weird
   const isPageHome = pageType === 'HOME';
 
+  // const handleScroll = (e) => {
+  //   if (e.scrollToTarget) {
+  //     e.scrollToTarget();
+  //   }
+  // };
+
   if (!item) {
     return <h3>LOADING...</h3>;
   }
@@ -23,6 +29,7 @@ function AreaItem({ item, pageType }) {
         <li className="col-span-12 flex justify-center sm:col-span-6 lg:col-span-4">
           <Link
             to={`/shops/city/${Id}`}
+            // onClick={handleScroll}
             className="inline-block rounded-3xl border-4 border-[#DB8C8C] px-6 hover:bg-[#DB8C8C] sm:px-0 md:w-full md:px-2"
           >
             {/* /shops/city/:id */}
@@ -30,9 +37,9 @@ function AreaItem({ item, pageType }) {
               <picture className="relative z-10 -mt-[30%] block h-[280px] w-[280px]">
                 {/* #NOTE: setting the height and weight to shows `Square` */}
                 <img
+                  className="h-full w-full rounded-full object-cover object-center shadow-xl"
                   loading="lazy"
                   alt={CityName || 'CityName'}
-                  className="h-full w-full rounded-full object-cover object-center shadow-xl"
                   src={imageUrl || AREA_IMG}
                   // src={AREA_IMG || imageUrl}
                 />
@@ -52,14 +59,14 @@ function AreaItem({ item, pageType }) {
         /* end of style-Large */
         <li className="col-span-11 pl-[12%] sm:col-span-6 md:col-span-6 lg:col-span-4">
           <Link
-            to="/shops/city"
+            to={`/shops/city/${Id}`}
             className="inline-flex h-[75%] w-full rounded-3xl bg-[#212529] hover:bg-[#DB8C8C]"
           >
             <div className="flex items-center">
-              <picture className="relative z-10 -ml-[16%] block w-[120px]">
+              <picture className="relative z-10 -ml-[16%] block h-[120px] w-[120px]">
                 <img
                   className="h-full w-full rounded-full object-cover object-center shadow-xl"
-                  src={AREA_IMG || imageUrl}
+                  src={imageUrl || AREA_IMG}
                   alt={CityName || 'CityName'}
                 />
               </picture>

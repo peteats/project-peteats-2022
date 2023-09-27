@@ -12,11 +12,12 @@ function DevSignup() {
   const userName = useInput('');
   const phoneNumber = useInput('');
   const address = useInput('');
+  const nickname = useInput('');
 
   const submitForm = (event) => {
     event.preventDefault();
-    console.log('email', email.value);
-    console.log('password', password.value);
+    // console.log('email', email.value);
+    // console.log('password', password.value);
 
     // Account: 'string';
     // Address: 'string';
@@ -29,48 +30,53 @@ function DevSignup() {
       Name: userName.value,
       MobilePhone: phoneNumber.value,
       Address: address.value,
+      Nickname: nickname.value,
     };
 
-    console.log(data);
+    // console.log(data);
     apiHelper.userSignUp(data).then((res) => {
-      console.log(res);
+      // console.log(res);
     });
     /* end of userSignUp() */
   };
 
   return (
-    <section className="container mx-auto min-h-screen py-20">
+    <section className="pe-container mx-auto min-h-screen py-20 px-2 md:px-[120px] lg:px-[160px] xl:px-[290px]">
       <h3 className="my-4 text-center text-lg font-bold">註冊帳號</h3>
 
       <form
         action=""
         onSubmit={submitForm}
-        className="flex flex-col items-center"
+        className="flex flex-col items-center gap-2"
       >
         <label htmlFor="email" className="my-1 block w-full">
-          Email
+          信箱
           <input
-            placeholder="EMAIL"
+            required
+            placeholder="信箱"
             value={email.value}
             type="email"
             name="email"
             id=""
-            className="my-1 w-full rounded bg-yellow-50 p-1"
+            className="my-1 w-full rounded border p-1"
             onChange={email.onChange}
           />
+          <small className="invisible">hint</small>
         </label>
 
         <label htmlFor="password" className="my-1 block w-full">
-          Password
+          密碼
           <input
-            placeholder="PASSWORD"
+            required
+            placeholder="密碼"
             value={password.value}
             type="password"
             name="password"
             id=""
-            className="my-1 w-full rounded bg-yellow-50 p-1"
+            className="my-1 w-full rounded border p-1"
             onChange={password.onChange}
           />
+          <small className="invisible">hint</small>
         </label>
 
         {/* <label htmlFor="passwordConfirm" className="my-1 block w-full">
@@ -87,46 +93,68 @@ function DevSignup() {
         </label> */}
 
         <label htmlFor="userName" className="my-1 block w-full">
-          Name
+          名字
           <input
-            placeholder="userName"
+            required
+            placeholder="名字"
             value={userName.value}
             type="text"
             name="Name"
             id=""
-            className="my-1 w-full rounded bg-yellow-50 p-1"
+            className="my-1 w-full rounded border p-1"
             onChange={userName.onChange}
           />
+          <small className="invisible">hint</small>
+        </label>
+
+        <label htmlFor="userNickname" className="my-1 block w-full">
+          暱稱
+          <input
+            required
+            placeholder="暱稱"
+            value={nickname.value}
+            type="text"
+            name="Nickname"
+            id=""
+            className="my-1 w-full rounded border p-1"
+            onChange={nickname.onChange}
+          />
+          <small className="invisible">hint</small>
         </label>
 
         <label htmlFor="phoneNumber" className="my-1 block w-full">
-          MobilePhone
+          手機號碼
           <input
-            placeholder="phoneNumber"
+            required
+            placeholder="手機號碼"
             value={phoneNumber.value}
             type="text"
             name="MobilePhone"
             id=""
-            className="my-1 w-full rounded bg-yellow-50 p-1"
+            className="my-1 w-full rounded border p-1"
             onChange={phoneNumber.onChange}
           />
+          <small className="invisible">hint</small>
         </label>
 
         <label htmlFor="Address" className="my-1 block w-full">
-          Address
+          地址
           <input
-            placeholder="Address"
+            placeholder="地址"
+            required
             value={address.value}
             type="text"
             name="Address"
             id=""
-            className="my-1 w-full rounded bg-yellow-50 p-1"
+            className="my-1 w-full rounded border p-1"
             onChange={address.onChange}
           />
+          <small className="invisible">hint</small>
         </label>
 
         <button
-          className="m-2 block rounded bg-[#333] px-16 py-2 text-center text-white"
+          className="hover:scale-103 col-span-1 block rounded bg-[#343A40]
+          py-2.5 px-6 text-center font-normal text-white transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:bg-[#DB8C8C] focus:outline-none active:bg-[#DB8C8C]/80"
           type="submit"
         >
           註冊帳號
@@ -139,7 +167,7 @@ function DevSignup() {
           id=""
           className="my-2 cursor-pointer hover:scale-100"
           onClick={() => {
-            console.log('login');
+            // console.log('login');
             navigate('/login');
           }}
         />

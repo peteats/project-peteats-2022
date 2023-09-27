@@ -155,14 +155,13 @@ function ShopList({ queryType, queryId }) {
       </ul> */}
       <ul className="grid grid-flow-row auto-rows-auto grid-cols-12 place-content-center gap-4 px-6 sm:px-0">
         {/* <ul className="-ml-6 -mb-8 flex flex-wrap px-6 md:px-0"> */}
-        {shopsData.map((item) => {
-          console.log('!', item);
-          // apiHelper.getImg(item?.imageUrl).then((res) => {
-          //   console.log('res:', res);
-          // });
+        {shopsData.map((item) =>
+        // console.log('!', item);
+        // apiHelper.getImg(item?.imageUrl).then((res) => {
+        //   console.log('res:', res);
+        // });
 
-          return <ShopItem key={item.Id} data={item} />;
-        })}
+          <ShopItem key={item.Id} data={item} />)}
       </ul>
       {' '}
       {/* </div> */}

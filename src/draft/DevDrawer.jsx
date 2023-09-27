@@ -90,7 +90,7 @@ function Drawer() {
   // }
 
   const saveToken = ({ JwtToken }) => {
-    console.log('AUTH_TOKEN:::', JwtToken);
+    // console.log('AUTH_TOKEN:::', JwtToken);
     const AUTH_TOKEN = `Bearer ${JwtToken}`;
     // setToken(JwtToken);
     localStorage.setItem('JWT', AUTH_TOKEN);
@@ -141,7 +141,7 @@ function Drawer() {
           <DrawerLink linkPath="page2" linkName="page2" setHide={setHide} />
 
           <DrawerLink linkPath="page3" linkName="page3" setHide={setHide} />
-          <DrawerLink linkPath="shops/3" linkName="page3" setHide={setHide} />
+
           <DrawerLink linkPath="page4" linkName="page4" setHide={setHide} />
           <DrawerLink linkPath="page5" linkName="page5" setHide={setHide} />
           <DrawerLink linkPath="page6" linkName="page6" setHide={setHide} />
@@ -192,14 +192,14 @@ function Drawer() {
         bg-gray-800/80 p-2 text-center shadow-sm 
         shadow-gray-500/40 `}
         onClick={() => {
-          console.log('LOG-IN');
+          // console.log('LOG-IN');
 
           const data = {
-            Account: 'maord@proton.me',
-            Password: 't8cBTsmY',
+            Account: '',
+            Password: '',
           };
           apiHelper.userLogin(data).then((res) => {
-            console.log(res);
+            // console.log(res);
 
             saveToken(res?.data);
           });

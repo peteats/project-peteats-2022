@@ -40,7 +40,7 @@ function SectionOrderInfo() {
     <div className="flex flex-col justify-start font-bold  md:flex-row">
       <img
         className="w-[364px] rounded-sm object-cover object-center"
-        src={imgStore}
+        src="https://picsum.photos/seed/picsum/200/300"
         alt="imgStore"
       />
 
@@ -51,7 +51,7 @@ function SectionOrderInfo() {
 
         <ul className="flex flex-col gap-4">
           {/* #TODO: data from Server */}
-          <ShopInfoItem />
+          {/* <ShopInfoItem /> */}
 
           <li className="">
             <p>
@@ -115,7 +115,9 @@ function SectionOrderInfo() {
 function Draft10() {
   return (
     <>
+      {/* <SectionOrderInfo /> */}
       <hr />
+      {/* <OrderState /> */}
       <hr />
     </>
   );

@@ -202,8 +202,8 @@ function Draft2() {
     <>
       <section className="pe-container mx-auto mb-10 px-12 sm:px-2 md:p-0">
         <pre className="hidden">
-          {console.log('2-tagId:', tagId)}
-          {console.log('2-cityId:', cityId)}
+          {/* {console.log('2-tagId:', tagId)}
+          {console.log('2-cityId:', cityId)} */}
           This is a dynamic page for_
           {tagId}
         </pre>

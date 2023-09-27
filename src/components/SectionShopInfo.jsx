@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Rating } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
+
 function SectionShopInfo({ data }) {
   const { Message } = data;
   // #REVIEW"
@@ -65,7 +68,19 @@ function SectionShopInfo({ data }) {
               <li className="">
                 <p>
                   {/* #TODO: */}
-                  <span className="ml-4 font-normal">{EvaluateStars}</span>
+                  {/* <Rating name="read-only" value={EvaluateStars} readOnly /> */}
+
+                  <Rating
+                    name="text-feedback"
+                    value={EvaluateStars}
+                    readOnly
+                    precision={0.5}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                  />
+
+                  {/* <span className="ml-4 font-normal">{EvaluateStars}</span> */}
                 </p>
               </li>
             </ul>

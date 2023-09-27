@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 function counterReducer(state, action) {
-  console.log('counterReducer', state);
+  // console.log('counterReducer', state);
 
   switch (action.type) {
     case 'plus':

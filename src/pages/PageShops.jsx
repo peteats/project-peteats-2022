@@ -34,7 +34,10 @@ function PageShops() {
       </code>
 
       {isFromSearch && (
-        <section className="ShopList pe-container mx-auto mb-10 px-12 sm:px-2 md:p-0">
+        <section
+          id="ShopList"
+          className="ShopList pe-container mx-auto mb-10 px-12 sm:px-2 md:p-0"
+        >
           <h2 className="mb-6 pt-20 text-left text-2xl font-bold">商家一覽</h2>
 
           <ShopList
@@ -56,11 +59,13 @@ function PageShops() {
         <AreaList pageType="SHOP" />
       </section>
 
-      <section className="ShopList pe-container mx-auto my-20 px-12 sm:px-2 md:p-0">
-        <h2 className="my-6 text-left text-2xl font-bold">熱門店家</h2>
+      {!isFromSearch && (
+        <section className="ShopList pe-container mx-auto my-20 px-12 sm:px-2 md:p-0">
+          <h2 className="my-6 text-left text-2xl font-bold">熱門店家</h2>
 
-        <ShopList queryType="HOT" />
-      </section>
+          <ShopList queryType="HOT" />
+        </section>
+      )}
     </>
   );
 }

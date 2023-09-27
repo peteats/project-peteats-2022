@@ -35,13 +35,13 @@ function ShopList({ queryType, queryId }) {
   useEffect(() => {
     if (queryType === 'TAG') {
       apiHelper.getShopsByTag(queryId).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopsByTag:::', res?.data);
+          // console.log('getShopsByTag:::', res?.data);
 
           const { data } = res.data;
-          console.log(data[0]);
+          // console.log(data[0]);
           setShopsData(data);
         }
       });
@@ -49,13 +49,13 @@ function ShopList({ queryType, queryId }) {
 
     if (queryType === 'CITY') {
       apiHelper.getShopsByCity(queryId).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopsByCity:::', res?.data);
+          // console.log('getShopsByCity:::', res?.data);
 
           const { Data } = res.data;
-          console.log(Data[0]);
+          // console.log(Data[0]);
           setShopsData(Data);
         }
       });
@@ -63,13 +63,13 @@ function ShopList({ queryType, queryId }) {
 
     if (queryType === 'HOT') {
       apiHelper.getShopsHot().then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopsHot:::', res?.data);
+          // console.log('getShopsHot:::', res?.data);
 
           const { Message } = res.data;
-          console.log(Message[0]);
+          // console.log(Message[0]);
           setShopsData(Message);
         }
       });

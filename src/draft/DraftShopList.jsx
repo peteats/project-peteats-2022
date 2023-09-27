@@ -22,16 +22,16 @@ function ShopList({ queryType, queryId }) {
 
   const fetchShops = () => {
     if (isTagRoute) {
-      console.log('isTagRoute');
+      // console.log('isTagRoute');
 
       return apiHelper.getShopsByTag(queryId).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopsByTag:::', res?.data);
+          // console.log('getShopsByTag:::', res?.data);
 
           const { data } = res.data;
-          console.log(data[0]);
+          // console.log(data[0]);
           // return setShopsData(data);
           return data;
         }
@@ -39,16 +39,16 @@ function ShopList({ queryType, queryId }) {
     }
 
     if (isCityRoute) {
-      console.log('isCityRoute');
+      // console.log('isCityRoute');
 
       return apiHelper.getShopsByCity(queryId).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res?.data?.Status) {
-          console.log('getShopsByCity:::', res?.data);
+          // console.log('getShopsByCity:::', res?.data);
 
           const { data } = res.data;
-          console.log(data[0]);
+          // console.log(data[0]);
           // setShopsData(data);
           return data;
         }
