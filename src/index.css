@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  /* outline: .5px solid #f73; */
+}
+
+html,body {
+  overflow-x: hidden;
+}
+
+@layer components {
+  .pe-container {
+    @apply container mx-auto max-w-[96%]  md:max-w-[84%] xl:max-w-[1140px];
+    /* @apply container mx-auto max-w-[96%]  md:max-w-[85%]; */
+  }
+}
