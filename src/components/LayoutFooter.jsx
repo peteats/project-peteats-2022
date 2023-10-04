@@ -5,7 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
-import DesignServices from '@mui/icons-material/DesignServices';
+// import DesignServices from '@mui/icons-material/DesignServices';
 import ApiIcon from '@mui/icons-material/Api';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -109,14 +109,14 @@ function LayoutFooter() {
             > */}
               <Link
                 to={{
-                  pathname: 'https://github.com/peteats/peteats.github.io',
+                  pathname: 'https://github.com/peteats/project-peteats-2022',
                 }}
                 // to="https://peteats.github.io/"
                 target="_blank"
                 rel="noreferrer"
                 className="block"
                 onClick={() => window.location.assign(
-                  'https://github.com/peteats/peteats.github.io',
+                  'https://github.com/peteats/project-peteats-2022',
                 )}
               >
                 <GitHubIcon
